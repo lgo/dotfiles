@@ -1,6 +1,10 @@
-storage
-packages
-compile-cache
-dev
-.npm
+.apm
 .node-gyp
+.storage
+blob-store
+compile-cache/
+packages
+storage
+themes
+blob-store
+recovery
