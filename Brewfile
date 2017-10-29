@@ -1,43 +1,76 @@
-cask_args appdir: '/Applications'
+tap "caskroom/cask"
+tap "caskroom/fonts"
+tap "crisidev/chunkwm"
+tap "d12frosted/emacs-plus"
+tap "go-delve/delve"
+tap "homebrew/bundle"
+tap "homebrew/core"
+tap "homebrew/services"
+tap "koekeishiya/formulae"
 
-tap 'homebrew/bundle'
-tap 'puma/puma'
-
-brew 'ack'
-brew 'coreutils'
-brew 'go'
-brew 'grc'
-brew 'imagemagick'
-brew 'jp2a'
-brew 'jq'
-brew 'libcaca', args: ['with-imlib2']
-brew 'libgit2'
-brew 'openssl'
-brew 'node'
-brew 'readline'
-brew 'postgresql'
-brew 'puma/puma/puma-dev'
-brew 'ruby-build'
-brew 'rbenv'
-brew 'roundup'
-brew 'spaceman-diff'
-brew 'spark'
-brew 'unrar'
-brew 'wget'
-brew 'yarn'
-brew 'youtube-dl'
-
-cask '1password'
-cask 'adium'
+cask "java"
+cask "osxfuse"
+brew "ant"
+brew "bash"
+brew "bash-completion@2"
+brew "ccache"
+brew "check"
+brew "clang-format"
+brew "cockroach"
+brew "coreutils"
+brew "ctags"
+brew "docker-machine-driver-xhyve"
+brew "elixir"
+brew "findutils"
+brew "gcc"
+brew "gdb"
+brew "glide"
+brew "gradle"
+brew "htop"
+brew "hub"
+brew "kubernetes-cli"
+brew "libpqxx"
+brew "little-cms2"
+brew "llvm", args: ["with-lldb"]
+brew "maven"
+brew "minimal-racket"
+brew "mongodb", restart_service: true
+brew "mosh"
+brew "netcat"
+brew "ninja"
+brew "nmap"
+brew "node"
+brew "ntfs-3g"
+brew "numpy"
+brew "pandoc"
+brew "qemu"
+brew "redis", restart_service: true
+brew "remake"
+brew "sdl"
+brew "sdl2"
+brew "terminal-notifier"
+brew "tmate"
+brew "uncrustify"
+brew "valgrind"
+brew "webp"
+brew "woof"
+brew "yarn"
+brew "zsh"
+brew "crisidev/chunkwm/chunkwm", args: ["HEAD"]
+brew "d12frosted/emacs-plus/emacs-plus", args: ["HEAD"]
+brew "go-delve/delve/delve"
+brew "koekeishiya/formulae/khd"
+brew "koekeishiya/formulae/kwm"
+cask "android-platform-tools"
+cask "android-sdk"
+cask "haskell-platform"
+cask "minikube"
+cask "ngrok"
+cask "spatial"
+cask "virtualbox"
+cask "caskroom/fonts/font-source-code-pro"
 cask 'atom'
-cask 'firefox'
-cask 'garmin-express'
-cask 'google-chrome'
-cask 'handbrake'
-cask 'mapbox-studio'
-cask 'seashore'
 cask 'slack'
 cask 'steam'
 cask 'transmission'
-cask 'tunnelbear'
 cask 'vlc'

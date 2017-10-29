@@ -1,0 +1,7 @@
+# Sets a breakpoint on any function called debugger().
+# This is an extremely handy tool for C. If you create an empty function,
+# void debugger() {} and call it where you want a breakpoint this config
+# will make gdb do that by default.
+set startup-with-shell off
+set breakpoint pending on
+break debugger

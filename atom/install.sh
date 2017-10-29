@@ -4,5 +4,6 @@
 #
 # This installs atom packages
 
-# FIXME(joey): Proper logging
+echo "› atom-package-install"
+
 atom-package-install

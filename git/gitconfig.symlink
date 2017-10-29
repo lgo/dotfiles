@@ -9,25 +9,76 @@
         wtf     = !$DOTFILES/bin/git-wtf
         rank-contributors = !$DOTFILES/bin/git-rank-contributors
         count   = !git shortlog -sn
+        remotes = remote -v
+        branches = branch -a
+        tags = tag -l
+        l = log --pretty=oneline -n 20 --graph --abbrev-commit
+        uncommit = reset --soft HEAD~
+        unstage = reset HEAD --
+        last = log -1 HEAD -p
+        commit = commit -v
+        log = log --decorate --graph --relative-date --stat
+        amend = commit --amend --reuse-message=HEAD
 [color]
         diff = auto
         status = auto
         branch = auto
-        ui = true
+        ui = auto
+[color "branch"]
+        current = yellow reverse
+        local = yellow
+        remote = green
+[color "diff"]
+        meta = yellow
+        frag = magenta
+        old = red
+        new = green
+[color "status"]
+        added = yellow
+        changed = green
+        untracked = cyan
 [core]
         excludesfile = ~/.gitignore
         editor = vim
+        # Prevents rebasing from modifying whitespace along the way.
+        # This has previously caused lots of issues.
+        autocrlf = false
+        whitespace = space-before-tab,-indent-with-non-tab,trailing-space
 [apply]
-        whitespace = nowarn
+        whitespace = fix
+[merge]
+        # A really nice, but old, diffing tool
+        tool = meld
+        confligstyle = diff3
 [mergetool]
         keepBackup = false
+[diff]
+        renames = copies
+        submodule = log
+        mnemonicprefix = true
+        algorithm = patience
 [difftool]
         prompt = false
 [help]
-        autocorrect = 1
+        # Dont attempt to autocorrect commands for awhile, 15s
+        autocorrect = 15
 [push]
-        # See `git help config` (search for push.default)
-        # for more information on different options of the below setting.
-        #
-        # Setting to git 2.0 default to suppress warning message
-        default = simple
+        default = current
+[branch "master"]
+        # Force `origin` to be the default remote for master.
+        # This prevents pushing to a fork's master branch.
+        remote = origin
+        merge = refs/heads/master
+[filter "lfs"]
+        # TODO(joey): I'm not sure what these do, but they're hanging around.
+        required = true
+        clean = git-lfs clean %f
+        smudge = git-lfs smudge %f
+[status]
+        # TODO(joey): Not sure what this does
+        submodulesummary = 1
+[pull]
+        # Do not make pulls add a merge commit, but instead rebase.
+        rebase = true
+[rerere]
+        enabled = true

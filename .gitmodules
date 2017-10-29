@@ -1,0 +1,6 @@
+[submodule "system/dircolors"]
+	path = system/dircolors
+	url = https://github.com/seebi/dircolors-solarized
+[submodule "vim/vim.symlink/bundle/Vundle.vim"]
+	path = vim/vim.symlink/bundle/Vundle.vim
+	url = https://github.com/VundleVim/Vundle.vim.git
