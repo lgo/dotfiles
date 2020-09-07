@@ -1,0 +1,3 @@
+#!/bin/sh
+echo '  count item'
+exec perl -n -e '/(\d+)[, ] *(\d+)/ && $1 != $2 && print "$1\n$2\n"' | sort -h | uniq -c | sort -hr

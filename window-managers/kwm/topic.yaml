@@ -1,0 +1,5 @@
+name: kwm
+disabled: true
+symlinks:
+  - src: .kwm
+    path: ~/.kwm

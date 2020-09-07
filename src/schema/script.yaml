@@ -1,0 +1,8 @@
+uri: tag:script
+schema:
+  type: "//rec"
+  required:
+    name: "//str"
+    file: "//str"
+  optional:
+    bootstrap: "//bool"

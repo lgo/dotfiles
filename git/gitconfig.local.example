@@ -1,0 +1,18 @@
+[user]
+        name = AUTHORNAME
+        email = AUTHOREMAIL
+[credential]
+        helper = GIT_CREDENTIAL_HELPER
+[github]
+        user = GITHUB_USERNAME
+
+# Optionally, we can also include a configuration for any repositories in a
+# folder. Commonly I will have everything in one directory and then set the
+# above configurations differently for work.
+#
+# Also, when dealing with larger repositories there are some helpful
+# configuration adjustments.
+[includeIf "gitdir:~/my-work-folder/**"]
+  path = "~/.dotfiles/work/gitconfig-work-identity"
+  path = "~/.dotfiles/git/gitconfig-fetch-only-my-branches"
+  path = "~/.dotfiles/git/gitconfig-large-repo"

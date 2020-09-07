@@ -1,0 +1,9 @@
+#!/bin/bash
+#
+# git-diff-commit shows the diff for a specific commit.
+
+commit=$1
+
+
+
+git diff $commit~1..$commit ${@:1}

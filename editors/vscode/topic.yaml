@@ -1,0 +1,15 @@
+name: Visual Studio Code
+scripts:
+  - name: Backup extensions
+    file: backup-extensions.sh
+  - name: Install extensions
+    file: install-extensions.sh
+    bootstrap: true
+# NB: Paths will be different on linux.
+symlinks:
+  - src: keybindings.json
+    path: ~/Library/Application Support/Code/User/keybindings.json
+  - src: settings.json
+    path: ~/Library/Application Support/Code/User/settings.json
+  - src: snippets
+    path: ~/Library/Application Support/Code/User/snippets

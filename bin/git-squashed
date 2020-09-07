@@ -1,0 +1,20 @@
+#!/bin/bash
+#
+# git-squashed finds all of the local branches that have since been merged into
+# master using "squash and merge".
+
+set -e
+
+git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do
+  mergebase=$(git merge-base master $branch)
+  tree=$(git rev-parse $branch\^{tree})
+  # Create a commit object which represents all of the changes in the tree (ie.
+  # target branch) from the merge base.
+  squashed_commit=$(git commit-tree $tree -p $mergebase -m _)
+  # Here `git cherry` checks whether the above commit object exists in master.
+  # This is indicated by the presences of "-"" in the output.
+  commit_status=$(git cherry master $squashed_commit)
+  if [[ "$commit_status" == "-"* ]]; then
+    echo $branch
+  fi
+done

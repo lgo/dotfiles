@@ -1,0 +1,22 @@
+name: macos
+scripts:
+  - name: Run App Store update
+    file: install-app-store.sh
+    bootstrap: true
+  - name: Install Brew
+    file: install-brew.sh
+    bootstrap: true
+  - name: Setup "defaults"
+    file: set-defaults.sh
+    bootstrap: true
+  - name: Link fonts
+    file: link-fonts.sh
+    bootstrap: true
+  - name: Link desktop backgrounds
+    file: link-desktop-backgrounds.sh
+    bootstrap: true
+symlinks:
+  - src: spectacle/Shortcuts.json
+    path: ~/Library/Application Support/Spectacle/Shortcuts.json
+  - src: keyboard_layouts
+    path: ~/Library/Keyboard Layouts

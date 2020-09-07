@@ -1,0 +1,3 @@
+[include]
+  # Makes the default identity joey@github.com
+  path = "~/.dotfiles/git/gitconfig-joey-identity"

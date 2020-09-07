@@ -1,0 +1,4 @@
+# Speeds up the terminal significantly in large repositories, when using
+# oh-my-zsh that has the git status on the status bar.
+[oh-my-zsh]
+  hide-dirty = 1

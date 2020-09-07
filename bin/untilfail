@@ -1,0 +1,11 @@
+#!/bin/bash
+#
+# untilfail will run the arguments as a shell command, until te commands fail.
+# For example: untilfail git rebase --continue
+
+if [[ "$#" -eq 0 ]]; then
+  echo "you did not pass anything into untilfail, please provide a command" 1>&2
+  exit 1
+fi
+
+while $@; do :; done

@@ -1,0 +1,51 @@
+#!/bin/bash
+#
+# pclone (aka patched clone) will clone a repository even if it has a duplicate
+# refspec caused by the configuration in fetch-only-my-branches. See that file
+# for more details.
+
+set -e
+
+# Only use patched clone for the configured repos.
+# Otherwise, fall back to a regular clone.
+fetch_only_my_branch_repos=(
+  pay-server
+  zoolander
+  uppsala
+  gocode
+)
+
+# Only use pclone for repositories with overriden refspecs.
+
+if [[ $# -ne 1 && $# -ne 2 ]]; then
+    echo "Illegal number of parameters. \nUsage: $0 <repository> [<directory>]"
+    exit 1
+fi
+
+repository=$1
+
+allowed_repo=false
+for repo in "${fetch_only_my_branch_repos[@]}"; do
+  if [[ $repository =~  ".*$repo.*" ]]; then
+    allowed_repo=true
+  fi
+done
+
+if [[ $allowed_repo = false ]]; then
+  git clone $repository $directory
+  exit 0
+fi
+
+if [[ $# -eq 1 ]]; then
+  # By default, set the directory of the clone operation to the basename of the
+  # repository.
+  repo_basename="${repository##*/}"
+  directory="${repo_basename%.*}"
+else
+  directory=$2
+fi
+
+git init $directory --initial-branch=master
+cd $directory
+git config add remote $repository
+git fetch --depth=1

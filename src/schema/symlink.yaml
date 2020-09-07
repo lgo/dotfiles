@@ -1,0 +1,6 @@
+uri: tag:symlink
+schema:
+  type: "//rec"
+  required:
+    src: "//str"
+    path: "//str"

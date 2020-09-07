@@ -1,0 +1,5 @@
+name: chunkwm
+disabled: true
+symlinks:
+  - src: .chunkwmrc
+    path: ~/.chunkwmrc

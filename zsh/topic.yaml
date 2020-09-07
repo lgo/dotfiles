@@ -1,0 +1,15 @@
+name: zsh
+scripts:
+  - name: Install oh-my-zsh
+    file: install-oh-my-zsh.sh
+symlinks:
+  - src: .zlogin
+    path: ~/.zlogin
+  - src: .zlogout
+    path: ~/.zlogout
+  - src: .zprofile
+    path: ~/.zprofile
+  - src: .zshenv
+    path: ~/.zshenv
+  - src: .zshrc
+    path: ~/.zshrc

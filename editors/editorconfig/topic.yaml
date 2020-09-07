@@ -1,0 +1,4 @@
+name: editorconfig
+symlinks:
+  - src: .editorconfig
+    path: ~/.editorconfig

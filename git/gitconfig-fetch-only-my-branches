@@ -1,0 +1,16 @@
+# Makes fetches and repo performance quicker by not pulling unnecessary remote
+# branches.
+#
+# NB: The refspecs from this configuration will cause `git clone` to not work.
+# If this is applied to a folder being cloned, eg. global include of `includeIf`
+# match, you need to instead use `git pclone`, an alias made to work around
+# this. The problem is caused by having a duplicate refspec for `master` during
+# cloning because the clone fetch stage includes a default refspec as well as a
+# configuration refspec. cloning. This problem and a workaround is discussed in
+# https://www.spinics.net/lists/git/msg360310.html
+# topic: "git-clone --config remote.origin.fetch regression"
+[remote "origin"]
+  fetch = +refs/heads/master:refs/remotes/origin/master
+  fetch = +refs/heads/master-*:refs/remotes/origin/master-*
+  fetch = +refs/heads/joey-*:refs/remotes/origin/joey-*
+  fetch = +refs/heads/joey/*:refs/remotes/origin/joey/*

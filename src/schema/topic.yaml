@@ -1,0 +1,11 @@
+type: "//rec"
+required:
+  name: "//str"
+optional:
+  disabled: "//bool"
+  scripts:
+    type: "//arr"
+    contents: "tag:script"
+  symlinks:
+    type: "//arr"
+    contents: "tag:symlink"
