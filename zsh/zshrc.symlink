@@ -61,3 +61,6 @@ bindkey "^[[B" down-line-or-beginning-search # Down
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
+
+# Brew openjdk for Java installations to compile.
+export CPPFLAGS="-I/usr/local/opt/openjdk/include"

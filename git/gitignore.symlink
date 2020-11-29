@@ -41,5 +41,8 @@ Session.vim
 
 .vscode/
 
+# IDEA
+.idea/
+
 # Misc
 *.tar.gz
