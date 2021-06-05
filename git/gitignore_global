@@ -3,6 +3,9 @@ augury/
 for-servers-srv/
 skynginx/
 
+# Random stuff that showed up.
+.bloop/
+
 # macos
 .DS_Store
 *~

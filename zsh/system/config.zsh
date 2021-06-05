@@ -59,4 +59,5 @@ bindkey '^?' backward-delete-char
 
 
 # set up nodeenv
-eval "$(nodenv init -)"
+# FIXME(joey): Increase startup speed, do not load nodeenv.
+# eval "$(nodenv init -)"

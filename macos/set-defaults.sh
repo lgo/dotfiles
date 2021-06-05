@@ -11,6 +11,18 @@
 
 echo "› macOS set defaults"
 
+# Set computer name (as done via System Preferences → Sharing)
+# if not already set.
+if ! [ -f ~/.hostname_is_set ]; then
+  echo " What will be your computer's hostname?"
+  read -e HOSTNAME
+  touch ~/.hostname_is_set
+  sudo scutil --set ComputerName "$HOSTNAME"
+  sudo scutil --set HostName "$HOSTNAME"
+  sudo scutil --set LocalHostName "$HOSTNAME"
+  sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "$1"
+fi
+
 # Ask for the administrator password upfront
 sudo -v
 

@@ -5,7 +5,6 @@
   "gitlens.currentLine.enabled": false,
   "gitlens.hovers.currentLine.over": "line",
   "explorer.confirmDelete": false,
-  "window.zoomLevel": -1,
   "editor.acceptSuggestionOnEnter": "off",
   "explorer.autoReveal": false,
   // Helps speed things up/
@@ -44,7 +43,6 @@
     "**/.ammonite": true
   },
   "files.useExperimentalFileWatcher": true,
-  "cSpell.language": "en",
   "workbench.activityBar.visible": true,
   "workbench.statusBar.visible": true,
   "editor.rulers": [
@@ -61,7 +59,6 @@
   },
   "explorer.confirmDragAndDrop": false,
   "typescript.updateImportsOnFileMove.enabled": "always",
-  "editor.formatOnSave": true,
   "flow.enabled": false,
   "metals.scalafmtConfigPath": ".scalafmt",
   "[json]": {
@@ -90,7 +87,6 @@
     "vs-kubernetes.helm-path.mac": "/Users/joey/.vs-kubernetes/tools/helm/darwin-amd64/helm",
     "vs-kubernetes.draft-path.mac": "/Users/joey/.vs-kubernetes/tools/draft/darwin-amd64/draft"
   },
-  // Stripe recommended. (go/vscode)
   // This ensures all new tabs are persistent, getting rid of the default behavior
   // where new tabs are in italics and can be replaced by the next new file you open.
   "workbench.editor.enablePreview": false,
@@ -151,4 +147,26 @@
     "editor.defaultFormatter": "redhat.vscode-yaml"
   },
   "yaml.format.enable": false,
+  "editor.formatOnSave": true,
+  "window.title": "${rootName}${separator}${activeEditorMedium}",
+  "workbench.editorAssociations": [
+    {
+      "viewType": "jupyter.notebook.ipynb",
+      "filenamePattern": "*.ipynb"
+    }
+  ],
+  "editor.tabSize": 2,
+  "python.languageServer": "Microsoft",
+  "update.mode": "none",
+  "go.toolsManagement.autoUpdate": true,
+  "workbench.colorTheme": "Default Light+",
+  "mssql.connections": [
+    {
+      "server": "{{put-server-name-here}}",
+      "database": "{{put-database-name-here}}",
+      "user": "{{put-username-here}}",
+      "password": "{{put-password-here}}"
+    }
+  ],
+  "C_Cpp.intelliSenseEngine": "Disabled",
 }

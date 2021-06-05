@@ -9,9 +9,11 @@
   # credit is a quicker way to give credit by amending the latest commit author.
   credit = !git-credit
   # update will fetch master and master-passing-tests and updates the local
-  # refs.
-  # TODO(joey): its unclear whether update-ref is necessary.
-  update = !git fetch --prune origin master:master master-passing-tests:master-passing-tests -f # && git update-ref refs/heads/master refs/remotes/origin/master && git update-ref refs/heads/master-passing-tests refs/remotes/origin/master-passing-tests
+  # refs. Additionally, runs update-ref to update the origin refs as they are
+  # not updated directly with the `git fetch` command. Without doing this, the
+  # ref used by the local linter is not updated and linting runs over master
+  # changes.
+  update = !git fetch --prune origin master:master master-passing-tests:master-passing-tests -f && git update-ref refs/remotes/origin/master refs/heads/master && git update-ref refs/remotes/origin/master-passing-tests refs/heads/master-passing-tests
   wtf = !$DOTFILES/bin/git-wtf
   # ???
   l = log --pretty=oneline -n 20 --graph --abbrev-commit
@@ -107,3 +109,5 @@
 [rerere]
   enabled = true
   branch = false
+[feature]
+	manyFiles = 1

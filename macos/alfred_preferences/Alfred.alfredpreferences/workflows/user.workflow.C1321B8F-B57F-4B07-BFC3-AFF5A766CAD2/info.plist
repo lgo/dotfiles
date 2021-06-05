@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>io.pereira.itermnewwindow</string>
+	<key>category</key>
+	<string>Tools</string>
+	<key>connections</key>
+	<dict>
+		<key>8123D0A4-4C20-45D8-95E4-728B7D460212</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>582BEC50-23CD-4DA5-9D8F-1D985C313099</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>B1DA7A8A-38E5-4164-B968-1BA74EB40012</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>582BEC50-23CD-4DA5-9D8F-1D985C313099</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Joey Pereira (joey@pereira.io)</string>
+	<key>description</key>
+	<string>Open a new iTerm window</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>iTerm new window</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>iterm new window</string>
+				<key>subtext</key>
+				<string>Open a new iTerm window</string>
+				<key>text</key>
+				<string>iTerm new window</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>B1DA7A8A-38E5-4164-B968-1BA74EB40012</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>tell application "System Events"
+	set ProcessList to name of every process
+	-- Check if iTerm2 is open.
+	if "iTerm2" is in ProcessList then
+		-- If already open, tell iTerm to open a new window.
+		tell process "iTerm2"
+			click menu item "New Window" of menu 1 of menu bar item "Shell" of menu bar 1
+		end tell
+	else
+		-- If not open, just open iTerm
+		tell application "/Applications/iTerm.app" to activate
+	end if
+end tell</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>6</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>582BEC50-23CD-4DA5-9D8F-1D985C313099</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>17</integer>
+				<key>hotmod</key>
+				<integer>1572864</integer>
+				<key>hotstring</key>
+				<string>T</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>8123D0A4-4C20-45D8-95E4-728B7D460212</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string></string>
+	<key>uidata</key>
+	<dict>
+		<key>582BEC50-23CD-4DA5-9D8F-1D985C313099</key>
+		<dict>
+			<key>xpos</key>
+			<integer>425</integer>
+			<key>ypos</key>
+			<integer>270</integer>
+		</dict>
+		<key>8123D0A4-4C20-45D8-95E4-728B7D460212</key>
+		<dict>
+			<key>xpos</key>
+			<integer>195</integer>
+			<key>ypos</key>
+			<integer>335</integer>
+		</dict>
+		<key>B1DA7A8A-38E5-4164-B968-1BA74EB40012</key>
+		<dict>
+			<key>xpos</key>
+			<integer>195</integer>
+			<key>ypos</key>
+			<integer>200</integer>
+		</dict>
+	</dict>
+	<key>webaddress</key>
+	<string>pereira.io</string>
+</dict>
+</plist>

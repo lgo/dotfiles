@@ -16,6 +16,8 @@ scripts:
     file: link-desktop-backgrounds.sh
     bootstrap: true
 symlinks:
+  - src: hammerspoon
+    path: ~/.hammerspoon
   - src: spectacle/Shortcuts.json
     path: ~/Library/Application Support/Spectacle/Shortcuts.json
   - src: keyboard_layouts
