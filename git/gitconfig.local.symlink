@@ -1,0 +1,7 @@
+[user]
+        name = Joey Pereira
+        email = joey@pereira.io 
+[credential]
+        helper = osxkeychain
+[github]
+        user = lego
