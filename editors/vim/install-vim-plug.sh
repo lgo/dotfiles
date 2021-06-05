@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+#
+# Installs vim-plug for managing Vim plugins
+
+set -e
 
 if [[ ! -f ~/.vim/autoload/plug.vim ]]; then
     echo "installing vim-plug"
