@@ -24,3 +24,4 @@ done
 
 unset path_files env_files
 unsetopt nullglob extendedglob
+source "$HOME/.cargo/env"
