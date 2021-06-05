@@ -4,7 +4,7 @@ brew "arp-scan"
 brew "autocode", link: false
 brew "awscli"
 brew "bash"
-brew "bash-completion@2"
+brew "bash-completion@2", link: false
 brew "bazel"
 brew "bfg"
 brew "boost"
@@ -20,7 +20,7 @@ brew "ctags"
 brew "curl"
 brew "d12frosted/emacs-plus/emacs-plus@27", args: ["HEAD"]
 brew "delve"
-brew "docker"
+brew "docker", link: false
 brew "docker-machine-driver-xhyve"
 brew "elixir"
 brew "erlang"
