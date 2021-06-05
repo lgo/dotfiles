@@ -1,8 +1,5 @@
 name: iTerm2
 scripts:
-  - name: Add "New Window" app
-    file: add-new-window-app.sh
-    bootstrap: true
   - name: Sync iTerm preferences
     file: sync-iterm-preferences.sh
     bootstrap: true
