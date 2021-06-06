@@ -1,4 +1,3 @@
-tap "crisidev/chunkwm"
 tap "d12frosted/emacs-plus"
 tap "go-delve/delve"
 tap "homebrew/bundle"
@@ -62,7 +61,6 @@ brew "hugo"
 brew "shared-mime-info"
 brew "webp"
 brew "jq"
-brew "khd", restart_service: true
 brew "kotlin"
 brew "kubernetes-cli"
 brew "kwm"
