@@ -1,3 +1,30 @@
+#####################
+# FIRST PROMPT LINE #
+#####################
+rosso='\e[1;34m'
+NC='\e[0m'
+echo -e "${rosso}Debian${NC}" `cat /etc/debian_version` "| ${rosso}ZSH${NC} ${ZSH_VERSION}"
+#####################
+# ZINIT             #
+#####################
+### Installer
+if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
+    print -P "%F{33}▓▒░ %F{220}Installing zinit plugin manager (zdharma/zinit)…%f"
+    command mkdir -p $HOME/.zinit
+    command git clone https://github.com/zdharma/zinit $HOME/.zinit/bin && \
+        print -P "%F{33}▓▒░ %F{34}Installation successful.%F" || \
+        print -P "%F{160}▓▒░ The clone has failed.%F"
+fi
+source "$HOME/.zinit/bin/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
+
+
+zinit ice depth=1; zinit light romkatv/powerlevel10k
+
+#####################
+# LEGACY            #
+#####################
 # Interactive environment configs.
 setopt nullglob extendedglob
 
