@@ -1,19 +1,23 @@
-# NOTE: Not intended to be used with zprofile, but can be.
+#####################
+# LEGACY            #
+#####################
 
-# Login configs.
-setopt nullglob
+# # NOTE: Not intended to be used with zprofile, but can be.
 
-# all of our login zsh files
-typeset -U login_files
-login_files=($DOTFILES/**/login.zsh)
+# # Login configs.
+# setopt nullglob
 
-# run all login files
-for file in ${login_files}; do
-    source "$file"
-done
+# # all of our login zsh files
+# typeset -U login_files
+# login_files=($DOTFILES/**/login.zsh)
 
-unset login_files
-unsetopt nullglob
+# # run all login files
+# for file in ${login_files}; do
+#     source "$file"
+# done
 
-# Load RVM into a shell session *as a function*
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+# unset login_files
+# unsetopt nullglob
+
+# # Load RVM into a shell session *as a function*
+# [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"

@@ -13,3 +13,5 @@ symlinks:
     path: ~/.zshenv
   - src: .zshrc
     path: ~/.zshrc
+  - src: .p10k.zsh
+    path: ~/.p10k.zsh

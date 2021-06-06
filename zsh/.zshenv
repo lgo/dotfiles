@@ -1,45 +1,49 @@
-# Environment configs.
-setopt nullglob extendedglob
 
-# shortcut to this dotfiles path is $DOTFILES
-export DOTFILES="$HOME/.dotfiles"
+#####################
+# LEGACY            #
+#####################
+# # Environment configs.
+# setopt nullglob extendedglob
 
-# your project folder that we can `c [tab]` to
-export PROJECTS="$HOME/Code"
+# # shortcut to this dotfiles path is $DOTFILES
+# export DOTFILES="$HOME/.dotfiles"
 
-local _old_path="$PATH"
+# # your project folder that we can `c [tab]` to
+# export PROJECTS="$HOME/Code"
 
-# env zsh files
-typeset -U env_files
-env_files=($DOTFILES/**/*env.zsh)
+# local _old_path="$PATH"
 
-# load the env files
-for file in ${env_files}; do
-  source "$file"
-done
+# # env zsh files
+# typeset -U env_files
+# env_files=($DOTFILES/**/*env.zsh)
 
-if [[ $PATH != $_old_path ]]; then
-  # `colors` isn't initialized yet, so define a few manually
-  typeset -AHg fg fg_bold
-  if [ -t 2 ]; then
-    fg[red]=$'\e[31m'
-    fg_bold[white]=$'\e[1;37m'
-    reset_color=$'\e[m'
-  else
-    fg[red]=""
-    fg_bold[white]=""
-    reset_color=""
-  fi
+# # load the env files
+# for file in ${env_files}; do
+#   source "$file"
+# done
 
-  cat <<MSG >&2
-${fg[red]}Warning:${reset_color} your \`~/.zshenv.local' configuration seems to edit PATH entries.
-Please move that configuration to \`.zshrc.local' like so:
-  ${fg_bold[white]}cat ~/.zshenv.local >> ~/.zshrc.local && rm ~/.zshenv.local${reset_color}
-(called from ${(%):-%N:%i})
-MSG
-fi
+# if [[ $PATH != $_old_path ]]; then
+#   # `colors` isn't initialized yet, so define a few manually
+#   typeset -AHg fg fg_bold
+#   if [ -t 2 ]; then
+#     fg[red]=$'\e[31m'
+#     fg_bold[white]=$'\e[1;37m'
+#     reset_color=$'\e[m'
+#   else
+#     fg[red]=""
+#     fg_bold[white]=""
+#     reset_color=""
+#   fi
 
-unset _old_path
+#   cat <<MSG >&2
+# ${fg[red]}Warning:${reset_color} your \`~/.zshenv.local' configuration seems to edit PATH entries.
+# Please move that configuration to \`.zshrc.local' like so:
+#   ${fg_bold[white]}cat ~/.zshenv.local >> ~/.zshrc.local && rm ~/.zshenv.local${reset_color}
+# (called from ${(%):-%N:%i})
+# MSG
+# fi
 
-unset path_files env_files
-unsetopt nullglob extendedglob
+# unset _old_path
+
+# unset path_files env_files
+# unsetopt nullglob extendedglob

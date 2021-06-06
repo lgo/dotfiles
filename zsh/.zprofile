@@ -1,18 +1,22 @@
-# NOTE: Not intended to be used with zlogin, but can be.
+#####################
+# LEGACY            #
+#####################
 
-# Login profile configs.
-setopt nullglob
+# # NOTE: Not intended to be used with zlogin, but can be.
 
-# all of our profile zsh files
-typeset -U profile_files
-profile_files=($DOTFILES/**/*profile.zsh)
+# # Login profile configs.
+# setopt nullglob
 
-# run all profile files
-for file in ${profile_files}; do
-    source "$file"
-done
+# # all of our profile zsh files
+# typeset -U profile_files
+# profile_files=($DOTFILES/**/*profile.zsh)
 
-unset profile_files
-unsetopt nullglob
+# # run all profile files
+# for file in ${profile_files}; do
+#     source "$file"
+# done
 
-export PATH="$HOME/.cargo/bin:$PATH"
+# unset profile_files
+# unsetopt nullglob
+
+# export PATH="$HOME/.cargo/bin:$PATH"
