@@ -114,9 +114,14 @@
     "deduplicated",
     "denormalized",
     "diffable",
+    "herokuapp",
     "pereira",
+    "pizzly",
     "qtree",
-    "struct"
+    "splitwise",
+    "struct",
+    "ynab",
+    "youneedabudget"
   ],
   "editor.renderControlCharacters": false,
   "C_Cpp.updateChannel": "Insiders",
