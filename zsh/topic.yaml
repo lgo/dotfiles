@@ -13,3 +13,7 @@ symlinks:
     path: ~/.zshenv
   - src: .zshrc
     path: ~/.zshrc
+  - src: .bashrc
+    path: ~/.bashrc
+  - src: .bash_profile
+    path: ~/.bash_profile
