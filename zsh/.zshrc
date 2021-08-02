@@ -68,4 +68,4 @@ source ~/.bashrc
 # TODO(joey): brew --prefix hardcoded.
 # $(brew --prefix)/opt/fzf/install
 /usr/local/opt/fzf/install
-eval "$(nodenv init -)"
+_evalcache nodenv init -

@@ -7,7 +7,7 @@ export TERM=xterm-256color
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(colored-man-pages npm bundler ruby gitfast github node pip gnu-utils fzf)
+plugins=(colored-man-pages npm bundler ruby gitfast github node pip gnu-utils fzf evalcache)
 
 
 # Set name of the theme to load.
