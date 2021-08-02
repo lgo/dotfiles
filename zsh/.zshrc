@@ -65,4 +65,7 @@ autoload -Uz compinit; compinit -u
 autoload -Uz bashcompinit; bashcompinit -u
 source ~/.bash_profile
 source ~/.bashrc
+# TODO(joey): brew --prefix hardcoded.
+# $(brew --prefix)/opt/fzf/install
+/usr/local/opt/fzf/install
 eval "$(nodenv init -)"
