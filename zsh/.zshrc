@@ -15,41 +15,19 @@ then
 fi
 
 # all of our non-path/env/profile/login/logout zsh files
-typeset -U path_files path_files interactive_files completion_files
-path_files=($DOTFILES/**/*path.zsh~**/*fpath.zsh)
-fpath_files=($DOTFILES**/*fpath.zsh)
-interactive_files=($DOTFILES/**/*.zsh~$DOTFILES**/*completion.zsh~$DOTFILES**/*path.zsh~$DOTFILES**/*env.zsh~$DOTFILES**/*profile.zsh~$DOTFILES**/*login.zsh~$DOTFILES**/*logout.zsh)
+typeset -U  interactive_files completion_files
+interactive_files=($DOTFILES/**/*.zsh~$DOTFILES/**/*completion.zsh~$DOTFILES/**/*path.zsh~$DOTFILES/**/*env.zsh~$DOTFILES/**/*profile.zsh~$DOTFILES/**/*login.zsh~$DOTFILES/**/*logout.zsh)
 completion_files=($DOTFILES/**/*completion.zsh)
 
 # Prevents tmux spawning duplicates for path (by de-duplicating the variable).
 typeset -aU path
 
-# path and env zsh files
-env_files=($DOTFILES/**/*env.zsh)
-
-# load the path files
-for file in ${path_files}; do
+# Load interactive files (everything else)
+for file in "${interactive_files[@]}" "${${completion_files[@]}}"; do
   source "$file"
 done
 
-# load fpath config files
-for file in ${fpath_files}; do
-  source "$file"
-done
-
-# load interactive files (everything but the completion, path, env,
-# profile, login, and logout files)
-for file in ${interactive_files}; do
-  source "$file"
-done
-
-
-# load every completion after autocomplete loads
-for file in ${completion_files}; do
-  source "$file"
-done
-
-unset fpath_files interactive_files completion_files
+unset interactive_files completion_files
 unsetopt nullglob extendedglob
 
 # Better history
@@ -63,9 +41,10 @@ bindkey "^[[B" down-line-or-beginning-search # Down
 
 autoload -Uz compinit; compinit -u
 autoload -Uz bashcompinit; bashcompinit -u
+
+# Continue to source bash files so that if something adds a configuration to
+# them, it will work without first editing files.
 source ~/.bash_profile
 source ~/.bashrc
-# TODO(joey): brew --prefix hardcoded.
-# $(brew --prefix)/opt/fzf/install
-/usr/local/opt/fzf/install
+
 _evalcache nodenv init -

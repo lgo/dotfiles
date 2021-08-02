@@ -4,3 +4,6 @@
 
 # Also install evalcache, used to speed up `eval` for env managers.
 [[ ! -d "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/evalcache" ]] git clone https://github.com/mroth/evalcache ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/evalcache
+
+# Install fzf
+/usr/local/opt/fzf/install --no-bash --bin
