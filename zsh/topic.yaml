@@ -17,3 +17,5 @@ symlinks:
     path: ~/.bashrc
   - src: .bash_profile
     path: ~/.bash_profile
+  - src: system/global_ignore
+    path: ~/.ignore

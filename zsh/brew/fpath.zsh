@@ -3,5 +3,5 @@
 if type brew &>/dev/null; then
   # TODO(joey): brew --prefix hardcoded.
   # FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
-  FPATH=/usr/local//share/zsh/site-functions:$FPATH
+  FPATH=/usr/local/share/zsh/site-functions:$FPATH
 fi
