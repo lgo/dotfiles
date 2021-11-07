@@ -21,7 +21,7 @@ ZSH_THEME="agnoster"
 
 if [[ "$(uname)" == "Darwin" ]]; then
   # OS X specific setup
-  plugins+=(osx brew)
+  plugins+=(macos brew)
   export CLICOLOR=YES
 else
   # ArchLinux specific setup
