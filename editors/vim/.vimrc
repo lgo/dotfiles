@@ -44,7 +44,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'Lokaltog/vim-easymotion'
 "the sparkup vim script is in a subdirectory, so pass the proper one in
 Plug 'rstacruz/sparkup', {'rpt': 'vim/'}
-Plug 'tpope/vim-rails.git'
 
 "vim-scripts repos 
 Plug 'vim-scripts/L9'

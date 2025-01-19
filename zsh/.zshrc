@@ -44,7 +44,6 @@ autoload -Uz bashcompinit; bashcompinit -u
 
 # Continue to source bash files so that if something adds a configuration to
 # them, it will work without first editing files.
-source ~/.bash_profile
 source ~/.bashrc
 
 _evalcache nodenv init -

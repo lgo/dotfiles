@@ -21,4 +21,6 @@ done
 unset profile_files path_files fpath_files env_files
 unsetopt nullglob
 
-export PATH="$HOME/.cargo/bin:$PATH"
+# Continue to source bash files so that if something adds a configuration to
+# them, it will work without first editing files.
+source ~/.bash_profile

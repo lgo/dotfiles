@@ -43,11 +43,8 @@
     "**/.ammonite": true
   },
   "files.useExperimentalFileWatcher": true,
-  "workbench.activityBar.visible": true,
   "workbench.statusBar.visible": true,
-  "editor.rulers": [
-    80
-  ],
+  "editor.rulers": [80],
   "editor.minimap.enabled": false,
   "git.autofetch": true,
   "workbench.sideBar.location": "left",
@@ -72,6 +69,9 @@
   "[bazel]": {
     "editor.formatOnSave": false
   },
+  "[python]": {
+    "editor.formatOnSave": true
+  },
   "go.formatTool": "goimports",
   "clangd.path": "/usr/local/opt/llvm@8/bin/clangd",
   "workbench.editor.enablePreviewFromQuickOpen": false,
@@ -88,7 +88,9 @@
     "vs-kubernetes.draft-path.mac": "/Users/joey/.vs-kubernetes/tools/draft/darwin-amd64/draft",
     "vscode-kubernetes.helm-path.mac": "/Users/joey/.vs-kubernetes/tools/helm/darwin-amd64/helm",
     "vscode-kubernetes.kubectl-path.mac": "/Users/joey/.vs-kubernetes/tools/kubectl/kubectl",
-    "vscode-kubernetes.minikube-path.mac": "/Users/joey/.vs-kubernetes/tools/minikube/darwin-amd64/minikube"
+    "vscode-kubernetes.minikube-path.mac": "/Users/joey/.vs-kubernetes/tools/minikube/darwin-amd64/minikube",
+    "vscode-kubernetes.minikube-path-mac": "/Users/joey/.vs-kubernetes/tools/minikube/darwin-amd64/minikube",
+    "vs-kubernetes.crd-code-completion": "enabled"
   },
   // This ensures all new tabs are persistent, getting rid of the default behavior
   // where new tabs are in italics and can be replaced by the next new file you open.
@@ -100,29 +102,47 @@
   "vsicons.dontShowNewVersionMessage": true,
   "editor.renderWhitespace": "boundary",
   "cSpell.userWords": [
+    "autokuma",
+    "Beelink",
     "Cutover",
+    "dataset",
+    "deduplicated",
     "Deduplicator",
     "Denorm",
+    "denormalized",
+    "diffable",
+    "dockerproxy",
+    "eques",
     "Flink",
+    "Gitea",
+    "herokuapp",
+    "iamckn",
+    "infisical",
+    "Klipper",
     "Kryo",
+    "kuma",
     "Lookback",
+    "mosquitto",
+    "pereira",
+    "pizzly",
+    "privs",
+    "pymongo",
+    "qtree",
+    "realtimeapi",
     "Rollup",
     "Rollups",
     "Semigroup",
     "Serde",
     "Serializer",
     "Serializers",
-    "Stateful",
-    "dataset",
-    "deduplicated",
-    "denormalized",
-    "diffable",
-    "herokuapp",
-    "pereira",
-    "pizzly",
-    "qtree",
+    "servarr",
     "splitwise",
+    "Stateful",
     "struct",
+    "tailscale",
+    "traefik",
+    "unhexlify",
+    "yedit",
     "ynab",
     "youneedabudget"
   ],
@@ -137,16 +157,11 @@
     "enabled": false,
     "liveIndexing": false,
     "delay": 500,
-    "exclude": [
-      ".terraform/**/*",
-      "**/.terraform/**/*"
-    ]
+    "exclude": [".terraform/**/*", "**/.terraform/**/*"]
   },
   "terraform.languageServer": {
     "external": true,
-    "args": [
-      "serve"
-    ]
+    "args": ["serve"]
   },
   "java.semanticHighlighting.enabled": true,
   "java.requirements.JDK11Warning": false,
@@ -159,15 +174,15 @@
   "window.title": "${rootName}${separator}${activeEditorMedium}",
   "workbench.editorAssociations": [
     {
-      "viewType": "jupyter.notebook.ipynb",
+      "viewType": "jupyter-notebook",
       "filenamePattern": "*.ipynb"
     }
   ],
   "editor.tabSize": 2,
-  "python.languageServer": "Microsoft",
+  "python.languageServer": "Default",
   "update.mode": "none",
   "go.toolsManagement.autoUpdate": true,
-  "workbench.colorTheme": "Default Light+",
+  "workbench.colorTheme": "Spinel",
   "mssql.connections": [
     {
       "server": "{{put-server-name-here}}",
@@ -178,4 +193,119 @@
   ],
   "C_Cpp.intelliSenseEngine": "Disabled",
   "jestrunner.jestCommand": "yarn test",
+  "[typescript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "bracketPairColorizer.depreciation-notice": false,
+  "cSpell.language": "en,en-GB",
+  "sonarlint.rules": {
+    "python:S5542": {
+      "level": "off"
+    },
+    "kubernetes:S6873": {
+      "level": "off"
+    },
+    "kubernetes:S6892": {
+      "level": "off"
+    },
+    "kubernetes:S6864": {
+      "level": "off"
+    },
+    "kubernetes:S6870": {
+      "level": "off"
+    },
+    "kubernetes:S6897": {
+      "level": "off"
+    },
+    "kubernetes:S6596": {
+      "level": "off"
+    }
+  },
+  "ruby.pathToBundler": "bundle",
+  "ruby.useBundler": true,
+  "ruby.rubocop.useBundler": true,
+  "sorbet.enabled": true,
+  "sorbet.lspConfigs": [
+    {
+      "id": "stable",
+      "name": "Sorbet",
+      "description": "Stable Sorbet Ruby IDE features",
+      "cwd": "${workspaceFolder}",
+      "command": ["bundle", "exec", "srb", "typecheck", "--lsp"]
+    },
+    {
+      "id": "beta",
+      "name": "Sorbet (Beta)",
+      "description": "Beta Sorbet Ruby IDE features",
+      "cwd": "${workspaceFolder}",
+      "command": [
+        "bundle",
+        "exec",
+        "srb",
+        "typecheck",
+        "--lsp",
+        "--enable-all-beta-lsp-features"
+      ]
+    },
+    {
+      "id": "experimental",
+      "name": "Sorbet (Experimental)",
+      "description": "Experimental Sorbet Ruby IDE features (warning: crashy, for developers only)",
+      "cwd": "${workspaceFolder}",
+      "command": [
+        "bundle",
+        "exec",
+        "srb",
+        "typecheck",
+        "--lsp",
+        "--enable-all-experimental-lsp-features"
+      ]
+    }
+  ],
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "redhat.telemetry.enabled": true,
+  "python.pythonPath": "/usr/local/bin/python3",
+  "sorbet.highlightUntyped": true,
+  // "sorbet.selectedLspConfigId": "stable-local",
+  // "sorbet.userLspConfigs": [
+  //   {
+  //     "id": "stable-local",
+  //     "name": "Sorbet",
+  //     "description": "Stable Sorbet Ruby IDE features",
+  //     "cwd": "${workspaceFolder}",
+  //     "command": [
+  //       "${workspaceFolder}/bin/bundle",
+  //       "exec",
+  //       "srb",
+  //       "typecheck",
+  //       "--lsp"
+  //     ]
+  //   }
+  // ],
+  "rubyLsp.rubyVersionManager": {
+    "identifier": "none"
+  },
+  "[ruby]": {
+    "editor.defaultFormatter": "Shopify.ruby-lsp",
+    "editor.insertSpaces": true,
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    "editor.rulers": [120],
+    "editor.semanticHighlighting.enabled": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "editor.tabSize": 2
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "github.copilot.editor.enableAutoCompletions": true
+  // "rubyLsp.rubyVersionManager": "custom",
+  // "rubyLsp.customRubyCommand": "export PATH=\"/usr/local/opt/ruby/bin:$PATH\""
 }
