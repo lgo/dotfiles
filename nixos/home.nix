@@ -1,7 +1,12 @@
 { config, pkgs, lib, ... }:
 
 {
-  home.stateVersion = "22.05";
+  home.username = "joey";
+  home.homeDirectory = "/Users/joey";
+
+  home.stateVersion = "24.11";
+
+  programs.home-manager.enable = true;
 
   # https://github.com/malob/nixpkgs/blob/master/home/default.nix
 
@@ -45,7 +50,7 @@
   # ] ++ lib.optionals stdenv.isDarwin [
   #   cocoapods
   #   m-cli # useful macOS CLI commands
-  ];
+  # ];
 
   # Misc configuration files --------------------------------------------------------------------{{{
 
