@@ -48,7 +48,7 @@ module Dotfiles
       puts "\033[2K [\033[0;31mFAIL\033[0m] #{msg}\n"
     end
 
-    def self.install_symlink!(topic, symlink)
+    def self.install_symlink!(topic, symlink, non_interactive:)
       src_path = Pathname.new(topic.dir).join(symlink.src).to_s
       dest_basedir = Pathname.new(symlink.path).dirname.to_s
       dest_path = symlink.path
@@ -62,11 +62,22 @@ module Dotfiles
       elsif symlink.has_conflict?
         if FileTest.symlink?(dest_absolute_path)
           current_link_destination = File.readlink(dest_absolute_path)
+          # Check if the current link destination is a symlink to the same source.
+          if current_link_destination == src_path
+            log_success("#{symlink.src} already linked")
+            return
+          end
           log_user("#{symlink.src} will overwrite existing link #{dest_path} (-> #{current_link_destination})")
         else
           log_user("#{symlink.src} will overwrite existing file: #{dest_path}")
         end
-        result = prompt_user("what do you want to do? [\e[1ms\e[0m]kip, [\e[1mo\e[0m]verwrite, [\e[1mb\e[0m]ackup to .bak?")
+
+        if non_interactive
+          result = :backup
+        else
+          result = prompt_user("what do you want to do? [\e[1ms\e[0m]kip, [\e[1mo\e[0m]verwrite, [\e[1mb\e[0m]ackup to .bak?")
+        end
+
         case result
         when :skip
           log_info("skipping #{symlink.src}")
@@ -103,11 +114,11 @@ module Dotfiles
       end
     end
 
-    def self.bootstrap(topic, symlinks:, scripts:)
+    def self.bootstrap(topic, symlinks:, scripts:, non_interactive:)
       puts " [ ⚙  ] bootstrapping #{topic.name} (#{topic.shortname})"
       if symlinks
         topic.symlinks.each do |symlink|
-          install_symlink!(topic, symlink)
+          install_symlink!(topic, symlink, non_interactive: non_interactive)
         end
       end
 
@@ -121,17 +132,17 @@ module Dotfiles
       puts " [ ✅ ] completed #{topic.name} (#{topic.shortname})"
     end
 
-    def self.execute(topics, symlinks:, scripts:)
+    def self.execute(topics, symlinks:, scripts:, non_interactive:)
       @@tempdir = Dir.mktmpdir
       @@had_failure = true
 
       # We care about installation ordering, such as installing macos first.
       macos_topic = topics.find { |topic| topic.shortname == "macos" }
       if macos_topic
-        bootstrap(macos_topic, symlinks: symlinks, scripts: scripts)
+        bootstrap(macos_topic, symlinks: symlinks, scripts: scripts, non_interactive: non_interactive)
       end
       topics.reject { |topic| topic.shortname == "macos" }.each do |topic|
-        bootstrap(topic, symlinks: symlinks, scripts: scripts)
+        bootstrap(topic, symlinks: symlinks, scripts: scripts, non_interactive: non_interactive)
       end
 
       # Clean up the temp directory if there were no failures.
