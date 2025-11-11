@@ -1,7 +1,8 @@
 name: zsh
 scripts:
-  - name: Install oh-my-zsh
-    file: install-oh-my-zsh.sh
+  - name: Install antidote
+    file: install-antidote.sh
+    bootstrap: true
 symlinks:
   - src: .zlogin
     path: ~/.zlogin
@@ -19,3 +20,7 @@ symlinks:
     path: ~/.bash_profile
   - src: system/global_ignore
     path: ~/.ignore
+  - src: antidote/zsh_plugins.txt
+    path: ~/.zsh_plugins.txt
+  - src: .p10k.zsh
+    path: ~/.p10k.zsh
