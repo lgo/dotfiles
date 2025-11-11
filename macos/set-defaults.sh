@@ -11,28 +11,12 @@
 
 echo "› macOS set defaults"
 
-# Set computer name (as done via System Preferences → Sharing)
-# if not already set.
-if ! [ -f ~/.hostname_is_set ]; then
-  echo " What will be your computer's hostname?"
-  read -e HOSTNAME
-  touch ~/.hostname_is_set
-  sudo scutil --set ComputerName "$HOSTNAME"
-  sudo scutil --set HostName "$HOSTNAME"
-  sudo scutil --set LocalHostName "$HOSTNAME"
-  sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "$1"
-fi
-
 # Ask for the administrator password upfront
 sudo -v
 
 # Close any open System Preferences panes, to prevent them from overriding
 # settings we’re about to change
 osascript -e 'tell application "System Preferences" to quit'
-
-# You can change how long notifications are shown for!
-# I did not mind the default, but feel free to change this.
-# defaults write com.apple.notificationcenterui bannerTime SECONDS
 
 # Disable press-and-hold for keys in favor of key repeat.
 # https://www.defaults-write.com/disable-press-and-hold-option-in-mac-os-x-10-7/
@@ -44,10 +28,6 @@ defaults write -g NSScrollViewRubberbanding -int 0
 
 # Show the ~/Library folder.
 chflags nohidden ~/Library
-
-# Set a really fast key repeat.
-# Actually do not. 0 is really harmful.
-# defaults write NSGlobalDomain KeyRepeat -int 0
 
 ## Speed up macos animations
 ## https://www.defaults-write.com/speed-up-macos-high-sierra/
@@ -76,14 +56,6 @@ defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
 
 # Remove duplicates in the “Open With” menu (also see `lscleanup` alias)
 /System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user
-
-# Disable the “Are you sure you want to open this application?” dialog
-# FIXME(joey): It appears ths causes lots of re-prompting that breaks some things.
-# defaults write com.apple.LaunchServices LSQuarantine -bool false
-
-# Reveal IP address, hostname, OS version, etc. when clicking the clock
-# in the login window
-# sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
 
 # Disable Photos from opening when plugging in devices
 defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
@@ -161,14 +133,6 @@ defaults write NSGlobalDomain com.apple.springing.delay -float 0
 # Avoid creating .DS_Store files on network or USB volumes
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
-
-# Set correct locale info.
-
-# Disable disk image verification
-# TODO(joey): Seems lurky, so I did not run these.
-# defaults write com.apple.frameworks.diskimages skip-verify -bool true
-# defaults write com.apple.frameworks.diskimages skip-verify-locked -bool true
-# defaults write com.apple.frameworks.diskimages skip-verify-remote -bool true
 
 # Remove Dropbox’s green checkmark icons in Finder
 file=/Applications/Dropbox.app/Contents/Resources/emblem-dropbox-uptodate.icns
@@ -266,9 +230,6 @@ sudo pmset -b sleep 5
 # ======
 # Dock
 # ======
-
-# Previous config:
-#   defaults write com.apple.dock expose-animation-duration -float 0.0001
 
 # Disable the delay when you hide the Dock
 defaults write com.apple.Dock autohide-delay -float 0
