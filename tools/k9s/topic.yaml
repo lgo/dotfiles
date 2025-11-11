@@ -1,0 +1,7 @@
+name: k9s
+symlinks:
+  - src: config.yaml
+    # TODO(joey): Set XDG_CONFIG_HOME and use that instead.
+    path: ~/Library/Application Support/k9s/config.yaml
+  - src: skins
+    path: ~/Library/Application Support/k9s/skins
