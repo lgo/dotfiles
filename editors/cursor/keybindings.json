@@ -136,5 +136,19 @@
   {
     "key": "shift+cmd+l",
     "command": "-aichat.insertselectionintochat"
+  },
+  {
+    "key": "cmd+i",
+    "command": "composerMode.agent"
+  },
+  {
+    "key": "shift+cmd+s",
+    "command": "-workbench.action.openAgentsView",
+    "when": "!isInBackgroundComposerWindow"
+  },
+  {
+    "key": "shift+cmd+l",
+    "command": "-notebook.selectAllFindMatches",
+    "when": "config.notebook.multiCursor.enabled && notebookFindWidgetFocused || config.notebook.multiCursor.enabled && notebookCellEditorFocused && activeEditor == 'workbench.editor.notebook'"
   }
 ]
