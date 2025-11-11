@@ -2,4 +2,4 @@
 #
 # Creates a new branch off the master ref then will checkout the branch.
 
-git checkout -b $1 master-passing-tests
+git checkout -b $1 master
