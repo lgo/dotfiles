@@ -1,0 +1,4 @@
+name: Python
+symlinks:
+  - src: .pdbrc
+    path: ~/.pdbrc

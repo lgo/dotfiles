@@ -1,0 +1,8 @@
+name: tmux
+symlinks:
+  - src: .tmux.conf
+    path: ~/.tmux.conf
+scripts:
+  - name: Install tmux plugins
+    file: setup-plugins.sh
+    bootstrap: true

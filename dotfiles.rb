@@ -33,6 +33,7 @@ module Dotfiles
       @options = {
         only_symlinks: false,
         only_scripts: false,
+        non_interactive: false,
       }
     end
 
@@ -53,6 +54,9 @@ module Dotfiles
           end
           opts.on("-s", "--only-scripts", "Only run scripts and make no symlinks") do
             @options[:only_scripts] = true
+          end
+          opts.on("-n", "--non-interactive", "Run in non-interactive mode and automatically overwrite existing files") do
+            @options[:non_interactive] = true
           end
         end,
         "script" => OptionParser.new do |opts|
@@ -111,7 +115,7 @@ module Dotfiles
         else
           topics = ARGV.map { |topic| fetch_topic(topic) }
         end
-        Dotfiles::Bootstrap.execute(topics, symlinks: !@options[:only_scripts], scripts: !@options[:only_symlinks])
+        Dotfiles::Bootstrap.execute(topics, symlinks: !@options[:only_scripts], scripts: !@options[:only_symlinks], non_interactive: @options[:non_interactive])
       when "info"
         if ARGV.size == 0
           topics = load_all_topics

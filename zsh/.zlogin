@@ -2,10 +2,11 @@
 
 # Login configs.
 setopt nullglob
+setopt extendedglob
 
 # all of our login zsh files
 typeset -U login_files
-login_files=($DOTFILES/**/login.zsh)
+login_files=($DOTFILES/zsh/**/login.zsh)
 
 # run all login files
 for file in ${login_files}; do
@@ -14,5 +15,4 @@ done
 
 unset login_files
 unsetopt nullglob
-
-# [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+unsetopt extendedglob

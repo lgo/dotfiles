@@ -1,3 +1,5 @@
+.metals/
+
 # Specific to gocode cause of linking protobufs
 augury/
 for-servers-srv/
@@ -49,7 +51,10 @@ Session.vim
 
 .vscode/
 .metals/
+.scala-build/
 
 # Misc
 *.tar.gz
 scratch/
+
+.bazel-output/

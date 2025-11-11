@@ -8,7 +8,7 @@ filetype off
 syntax on " Turn on syntax highligthing
 set showmatch  "Show matching bracets when text indicator is over them
 
-colorscheme delek
+
 
 " Mouse
 if has('mouse')
@@ -44,6 +44,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'Lokaltog/vim-easymotion'
 "the sparkup vim script is in a subdirectory, so pass the proper one in
 Plug 'rstacruz/sparkup', {'rpt': 'vim/'}
+"Plug 'tpope/vim-rails.git'
 
 "vim-scripts repos 
 Plug 'vim-scripts/L9'
@@ -51,6 +52,8 @@ Plug 'vim-scripts/FuzzyFinder'
 
 Plug 'itchyny/lightline.vim'
 "Plug 'bling/vim-airline'
+
+Plug 'flazz/vim-colorschemes'
 
 Plug 'chrisbra/csv.vim'
 Plug 'majutsushi/tagbar'
@@ -159,3 +162,7 @@ let ttimeoutlen = 50
 
 let g:airline#extensions#branch#enabled = 1
 
+
+
+" Set colorscheme after installing vim-colorschemes
+colorscheme delek

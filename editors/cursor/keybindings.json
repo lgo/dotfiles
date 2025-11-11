@@ -1,0 +1,154 @@
+// Place your key bindings in this file to overwrite the defaults
+[
+  {
+    "key": "alt+cmd+r",
+    "command": "-revealFileInOS",
+    "when": "!editorFocus"
+  },
+  {
+    "key": "cmd+r",
+    "command": "workbench.files.action.showActiveFileInExplorer"
+  },
+  {
+    "key": "cmd+q",
+    "command": "-workbench.action.quit"
+  },
+  {
+    "key": "f6 ctrl+",
+    "command": "workbench.action.debug.pause",
+    "when": "debugState == 'running'"
+  },
+  {
+    "key": "f6",
+    "command": "-workbench.action.debug.pause",
+    "when": "debugState == 'running'"
+  },
+  {
+    "key": "f6",
+    "command": "workbench.action.debug.run",
+    "when": "!inDebugMode"
+  },
+  {
+    "key": "ctrl+f5",
+    "command": "-workbench.action.debug.run",
+    "when": "!inDebugMode"
+  },
+  {
+    "key": "ctrl+cmd+w",
+    "command": "-workbench.action.toggleTabsVisibility"
+  },
+  {
+    "key": "ctrl+cmd+w",
+    "command": "-workbench.action.toggleTabsVisibility"
+  },
+  {
+    "key": "ctrl+cmd+w",
+    "command": "-workbench.action.toggleTabsVisibility"
+  },
+  {
+    "key": "ctrl+cmd+w",
+    "command": "-workbench.action.toggleTabsVisibility"
+  },
+  {
+    "key": "ctrl+cmd+w",
+    "command": "-workbench.action.toggleTabsVisibility"
+  },
+  {
+    "key": "cmd+r cmd+r",
+    "command": "workbench.action.reloadWindow",
+    "when": "isDevelopment"
+  },
+  {
+    "key": "cmd+r",
+    "command": "-workbench.action.reloadWindow",
+    "when": "isDevelopment"
+  },
+  {
+    "key": "cmd+r",
+    "command": "-workbench.action.reloadWindow",
+    "when": "isDevelopment"
+  },
+  {
+    "key": "cmd+r",
+    "command": "-workbench.action.reloadWindow",
+    "when": "isDevelopment"
+  },
+  {
+    "key": "cmd+r",
+    "command": "-workbench.action.reloadWindow",
+    "when": "isDevelopment"
+  },
+  {
+    "key": "cmd+r",
+    "command": "-workbench.action.reloadWindow",
+    "when": "isDevelopment"
+  },
+  {
+    "key": "cmd+r",
+    "command": "-workbench.action.reloadWindow",
+    "when": "isDevelopment"
+  },
+  {
+    "key": "cmd+r",
+    "command": "-workbench.action.reloadWindow",
+    "when": "isDevelopment"
+  },
+  {
+    "key": "cmd+r",
+    "command": "-workbench.action.reloadWindow",
+    "when": "isDevelopment"
+  },
+  {
+    "key": "cmd+r",
+    "command": "-workbench.action.reloadWindow",
+    "when": "isDevelopment"
+  },
+  {
+    "key": "shift+enter",
+    "command": "-python.execSelectionInTerminal",
+    "when": "editorTextFocus && !findInputFocussed && !jupyter.ownsSelection && !notebookEditorFocused && !replaceInputFocussed && editorLangId == 'python'"
+  },
+  {
+    "key": "shift+enter",
+    "command": "-workbench.action.terminal.findNext",
+    "when": "terminalFindInputFocused && terminalHasBeenCreated || terminalFindInputFocused && terminalProcessSupported"
+  },
+  {
+    "key": "cmd+r",
+    "command": "-python.refreshTensorBoard",
+    "when": "python.hasActiveTensorBoardSession"
+  },
+  {
+    "key": "shift+enter",
+    "command": "-python.execInREPL",
+    "when": "config.python.REPL.sendToNativeREPL && editorTextFocus && !accessibilityModeEnabled && !jupyter.ownsSelection && !notebookEditorFocused && editorLangId == 'python' && activeEditor != 'workbench.editor.interactive'"
+  },
+  {
+    "key": "shift+enter",
+    "command": "-python.execSelectionInTerminal",
+    "when": "editorTextFocus && !findInputFocussed && !jupyter.ownsSelection && !notebookEditorFocused && !replaceInputFocussed && editorLangId == 'python' && activeEditor != 'workbench.editor.interactive'"
+  },
+  {
+    "key": "enter",
+    "command": "-python.execInREPLEnter",
+    "when": "!config.interactiveWindow.executeWithShiftEnter && activeEditor == 'workbench.editor.interactive'"
+  },
+  {
+    "key": "shift+cmd+l",
+    "command": "-aichat.insertselectionintochat"
+  },
+  {
+    "key": "cmd+i",
+    "command": "composerMode.agent"
+  },
+  {
+    "key": "shift+cmd+s",
+    "command": "-workbench.action.openAgentsView",
+    "when": "!isInBackgroundComposerWindow"
+  },
+  {
+    "key": "shift+cmd+l",
+    "command": "-notebook.selectAllFindMatches",
+    "when": "config.notebook.multiCursor.enabled && notebookFindWidgetFocused || config.notebook.multiCursor.enabled && notebookCellEditorFocused && activeEditor == 'workbench.editor.notebook'"
+  }
+]

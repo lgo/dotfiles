@@ -54,5 +54,4 @@ Pictures/
 **/target/
 **/site-packages/
 **/node_modules/
-.oh-my-zsh/
 !**/.git/config/

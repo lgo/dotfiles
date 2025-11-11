@@ -1,0 +1,30 @@
+#!/bin/bash
+#
+# remote-fetch will add the branch to the refs prior to a git fetch.
+#
+# Usage
+# -----
+#   git remote-fetch <branch> [remote]
+#
+# Examples
+# --------
+#   git remote-fetch main
+#   git remote-fetch main origin
+#
+# By default, the remote is origin.
+
+set -e
+
+if [[ $# -eq 0 || $# -gt 2 ]]; then
+  echo "Usage: git remote-fetch <branch> [remote]" >&2
+  exit 1
+fi
+
+BRANCH="${1}";
+REMOTE="${2:-origin}";
+shift 2;
+
+# Remove any existing fetch refs for the branch.
+# git config --unset-all "remote.$REMOTE.fetch";
+git config --add "remote.$REMOTE.fetch" "+refs/heads/$BRANCH:refs/heads/$BRANCH";
+git fetch "$REMOTE" "$BRANCH";

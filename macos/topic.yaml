@@ -9,8 +9,8 @@ scripts:
   - name: Setup "defaults"
     file: set-defaults.sh
     bootstrap: true
-  - name: Link fonts
-    file: link-fonts.sh
+  - name: Install fonts
+    file: install-fonts.sh
     bootstrap: true
   - name: Link desktop backgrounds
     file: link-desktop-backgrounds.sh
@@ -18,7 +18,5 @@ scripts:
 symlinks:
   - src: hammerspoon
     path: ~/.hammerspoon
-  - src: spectacle/Shortcuts.json
-    path: ~/Library/Application Support/Spectacle/Shortcuts.json
-  - src: keyboard_layouts
-    path: ~/Library/Keyboard Layouts
+  - src: keyboard_layouts/US_disabled_option_keys.keylayout
+    path: ~/Library/Keyboard Layouts/US_disabled_option_keys.keylayout

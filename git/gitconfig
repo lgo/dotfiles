@@ -8,12 +8,12 @@
   all = add -A
   # credit is a quicker way to give credit by amending the latest commit author.
   credit = !git-credit
-  # update will fetch master and master-passing-tests and updates the local
+  # update will fetch master and updates the local
   # refs. Additionally, runs update-ref to update the origin refs as they are
   # not updated directly with the `git fetch` command. Without doing this, the
   # ref used by the local linter is not updated and linting runs over master
   # changes.
-  update = !git fetch --prune origin master:master master-passing-tests:master-passing-tests -f && git update-ref refs/remotes/origin/master refs/heads/master && git update-ref refs/remotes/origin/master-passing-tests refs/heads/master-passing-tests
+  update = !git fetch --prune origin master:master -f && git update-ref refs/remotes/origin/master refs/heads/master
   wtf = !$DOTFILES/bin/git-wtf
   # ???
   l = log --pretty=oneline -n 20 --graph --abbrev-commit
@@ -33,7 +33,7 @@
   # Alias for amending the past commit without editing message.
   amend = commit --amend --reuse-message=HEAD
   # Rebase off of latest master.
-  rebase-master = !git update && git rebase -i master-passing-tests
+  rebase-master = !git update && git rebase -i master
   # Check out a new branch from latest master.
   cob = !git update && git-new-branch
   # Check out a branch from the latest (loaded) master. Does not require
@@ -50,6 +50,8 @@
   # cleanup-squashed will find branches that have been "squashed and merged" and
   # then delete them.
   cleanup-squashed = !git-squashed | xargs git branch -D
+  # Fetch a branch from a remote.
+  remote-fetch = !git-remote-fetch
 [color]
   diff = auto
   status = auto
@@ -101,7 +103,7 @@
 [push]
   default = current
 [status]
-  # TODO(joey): Not sure what this does
+  # Include a brief summary of submodule changes in `git status`.
   submodulesummary = 1
 [pull]
   # Do not make pulls add a merge commit, but instead rebase.
@@ -111,3 +113,7 @@
   branch = false
 [feature]
 	manyFiles = 1
+[safe]
+	directory = *
+[oh-my-zsh]
+  hide-dirty = true
