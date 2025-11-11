@@ -1,0 +1,8 @@
+[user]
+  name = "Joey Pereira"
+  email = "joey@pereira.io"
+  signingKey = 4197B5BBC69B17A838087E10B37B4F31BE1FA3F4
+[commit]
+  gpgsign = false
+[github]
+  user = "lgo"
