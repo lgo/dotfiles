@@ -1,0 +1,8 @@
+name: hammerspoon
+scripts:
+  - name: Install hammerspoon
+    file: install-hammerspoon.sh
+    bootstrap: true
+symlinks:
+  - src: config
+    path: ~/.hammerspoon
