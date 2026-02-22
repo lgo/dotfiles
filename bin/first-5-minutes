@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [[ ! -d "$HOME/.dotfiles" ]]; then
+  echo "~/.dotfiles not found. Clone your dotfiles first."
+  exit 1
+fi
+
+cd "$HOME/.dotfiles"
+
+echo "[1/5] Build sprout configuration"
+darwin-rebuild build --flake ./nixos#sprout
+
+echo "[2/5] Verify key binaries"
+for cmd in zsh git ruby task direnv; do
+  if command -v "$cmd" >/dev/null 2>&1; then
+    echo "  - $cmd: $(command -v "$cmd")"
+  else
+    echo "  - $cmd: MISSING"
+  fi
+done
+
+echo "[3/5] Verify shell wiring"
+echo "  - ~/.zshrc -> $(readlink "$HOME/.zshrc" || echo "not symlinked")"
+
+echo "[4/5] Install git hooks (if pre-commit exists)"
+if command -v pre-commit >/dev/null 2>&1; then
+  ./bin/setup-pre-commit
+else
+  echo "  - pre-commit not installed yet; skipping hook install"
+fi
+
+echo "[5/5] Next action"
+echo "Run: darwin-rebuild switch --flake ./nixos#sprout"
+echo "Then open a new login shell: exec zsh -l"

@@ -1,0 +1,50 @@
+version: '3'
+
+tasks:
+  build-sprout:
+    desc: Build nix-darwin configuration for sprout
+    cmds:
+      - darwin-rebuild build --flake ./nixos#sprout
+
+  switch-sprout:
+    desc: Switch nix-darwin configuration for sprout
+    cmds:
+      - darwin-rebuild switch --flake ./nixos#sprout
+
+  flake-check:
+    desc: Run flake checks for nix config
+    cmds:
+      - nix flake check ./nixos
+
+  fmt:
+    desc: Run repo formatters and linters through pre-commit
+    cmds:
+      - pre-commit run --all-files
+
+  check:
+    desc: Full local validation (build + flake + smoke + hooks)
+    cmds:
+      - task: build-sprout
+      - task: flake-check
+      - task: smoke
+      - task: fmt
+
+  precommit-install:
+    desc: Install git pre-commit and pre-push hooks
+    cmds:
+      - ./bin/setup-pre-commit
+
+  bootstrap-first-5:
+    desc: Run first-run checks for a fresh machine
+    cmds:
+      - ./bin/first-5-minutes
+
+  benchmark-shell:
+    desc: Benchmark interactive zsh startup time
+    cmds:
+      - ./bin/benchmark-shell-startup
+
+  smoke:
+    desc: Run local smoke checks for core dotfiles behavior
+    cmds:
+      - ./bin/smoke-test local

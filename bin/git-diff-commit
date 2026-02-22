@@ -4,6 +4,4 @@
 
 commit=$1
 
-
-
 git diff $commit~1..$commit ${@:1}

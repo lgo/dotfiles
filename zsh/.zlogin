@@ -1,3 +1,4 @@
+# Has been ported to nix
 # NOTE: Not intended to be used with zprofile, but can be.
 
 # Login configs.
@@ -10,7 +11,7 @@ login_files=($DOTFILES/zsh/**/login.zsh)
 
 # run all login files
 for file in ${login_files}; do
-    source "$file"
+  source "$file"
 done
 
 unset login_files

@@ -1,2 +1,3 @@
-# Allows for using `cursor ...`
-export cursor="/Applications/Cursor.app/Contents/MacOS/Cursor"
+# Compatibility shim for legacy zsh init paths.
+# Cursor-specific aliases moved to tools/editors/cursor; keep file to avoid
+# startup errors for older generated Home Manager configs.

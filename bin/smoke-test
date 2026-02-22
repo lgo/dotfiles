@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+mode="${1:-local}"
+
+if [[ "$mode" != "local" && "$mode" != "ci" ]]; then
+  echo "Usage: $0 [local|ci]"
+  exit 1
+fi
+
+require_cmd() {
+  if ! command -v "$1" >/dev/null 2>&1; then
+    echo "missing command: $1"
+    exit 1
+  fi
+}
+
+# Always required in both local and CI modes.
+require_cmd nix
+require_cmd git
+
+if [[ "$mode" == "local" ]]; then
+  echo "Running local smoke checks..."
+  for cmd in darwin-rebuild zsh task ruby atuin zoxide fd; do
+    require_cmd "$cmd"
+  done
+
+  [[ -L "$HOME/.zshrc" ]] || {
+    echo "expected ~/.zshrc to be a symlink managed by Home Manager"
+    exit 1
+  }
+
+  nix flake metadata ./nixos >/dev/null
+  darwin-rebuild --version >/dev/null
+  task --list-all >/dev/null
+  ruby --version >/dev/null
+  echo "local smoke checks passed"
+  exit 0
+fi
+
+echo "Running CI smoke checks..."
+nix flake metadata ./nixos >/dev/null
+test -f Taskfile.yml
+test -f .pre-commit-config.yaml
+test -f nixos/flake.nix
+echo "ci smoke checks passed"

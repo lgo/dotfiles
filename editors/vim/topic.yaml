@@ -1,8 +1,0 @@
-name: Vim
-scripts:
-  - name: Install vim-plug package manager
-    file: install-vim-plug.sh
-    bootstrap: true
-symlinks:
-  - src: .vimrc
-    path: ~/.vimrc

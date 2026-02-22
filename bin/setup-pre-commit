@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if ! command -v pre-commit >/dev/null 2>&1; then
+  echo "pre-commit not found. Install/apply your Nix config first."
+  echo "Try: darwin-rebuild switch --flake ~/.dotfiles/nixos#sprout"
+  exit 1
+fi
+
+pre-commit install
+pre-commit install --hook-type pre-push
+
+echo "pre-commit hooks installed."
+echo "Run once across the repo with: pre-commit run --all-files"

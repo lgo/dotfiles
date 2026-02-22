@@ -1,5 +1,0 @@
-name: kdh
-disabled: true
-symlinks:
-  - src: .kdhrc
-    path: ~/.kdhrc

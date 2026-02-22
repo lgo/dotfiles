@@ -1,0 +1,127 @@
+# Load a local (private) configuration in addition to this public one.
+[include]
+  path = ~/.dotfiles/tools/git/gitconfig.local
+[alias]
+  # seee the changes for a commit
+  diffc = !git-diff-commit
+  # all will stage all unstaged files.
+  all = add -A
+  # credit is a quicker way to give credit by amending the latest commit author.
+  credit = !git-credit
+  # update will fetch master and updates the local
+  # refs. Additionally, runs update-ref to update the origin refs as they are
+  # not updated directly with the `git fetch` command. Without doing this, the
+  # ref used by the local linter is not updated and linting runs over master
+  # changes.
+  update = !git fetch --prune origin master:master -f && git update-ref refs/remotes/origin/master refs/heads/master
+  wtf = !$DOTFILES/bin/git-wtf
+  # ???
+  l = log --pretty=oneline -n 20 --graph --abbrev-commit
+  # Pop off the last commit.
+  uncommit = reset --soft HEAD~
+  # Cheaper status: skips all untracked files.
+  status = status -uno
+  # Expensive status: shows untracked files.
+  statusu = status -unormal
+  # Unstage everything,
+  unstage = reset HEAD --
+  # Show the last commit details.
+  last = log -1 HEAD -p
+  # Verbose commit details.
+  commit = commit -v
+  log = log --decorate --graph --relative-date --stat
+  # Alias for amending the past commit without editing message.
+  amend = commit --amend --reuse-message=HEAD
+  # Rebase off of latest master.
+  rebase-master = !git update && git rebase -i master
+  # Check out a new branch from latest master.
+  cob = !git update && git-new-branch
+  # Check out a branch from the latest (loaded) master. Does not require
+  # any networking.
+  co = !git-new-branch
+  # Find all the work you have done in the last half!
+  pastwork = log --pretty="%s" --author $USER --since '6 months ago' --reverse
+  # Get current branch name.
+  current = rev-parse --abbrev-ref HEAD
+  # pclone (aka patched clone) will clone a repository even if it has a
+  # duplicate refspec caused by the configuration in fetch-only-my-branches. See
+  # that file for more details.
+  pclone = !git-pclone
+  # cleanup-squashed will find branches that have been "squashed and merged" and
+  # then delete them.
+  cleanup-squashed = !git-squashed | xargs git branch -D
+  # Fetch a branch from a remote.
+  remote-fetch = !git-remote-fetch
+[color]
+  diff = auto
+  status = auto
+  branch = auto
+  ui = auto
+[color "branch"]
+  current = yellow reverse
+  local = yellow
+  remote = green
+[color "diff"]
+  meta = yellow
+  frag = magenta
+  old = red
+  new = green
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = cyan
+[core]
+  excludesfile = ~/.gitignore_global
+  editor = vim
+  # Prevents rebasing from modifying whitespace along the way.
+  # This has previously caused lots of issues.
+  autocrlf = false
+  whitespace = space-before-tab,-indent-with-non-tab,trailing-space
+  # Changes the "paging" behaviour of git command outputs to not use less if the
+  # contents fit on one screen. This makes for more desirable behaviour when
+  # less is unnecessary.
+  # pager = less --quit-if-one-screen --raw-control-chars --no-init
+[apply]
+  #whitespace = fix
+[merge]
+  # A really nice, but old, diffing tool
+  tool = meld
+  confligstyle = diff3
+[mergetool]
+  keepBackup = false
+[diff]
+  renames = copies
+  submodule = log
+  mnemonicprefix = true
+  algorithm = patience
+  colorMoved = yes
+[difftool]
+  prompt = false
+[help]
+  # Dont attempt to autocorrect commands for awhile, 15s
+  autocorrect = 15
+[push]
+  default = current
+[status]
+  # Include a brief summary of submodule changes in `git status`.
+  submodulesummary = 1
+[pull]
+  # Do not make pulls add a merge commit, but instead rebase.
+  rebase = true
+[rerere]
+  enabled = true
+  branch = false
+[feature]
+	manyFiles = 1
+[safe]
+	directory = *
+[oh-my-zsh]
+  hide-dirty = true
+[commit]
+	gpgsign = true
+[tag]
+	gpgSign = true
+[user]
+	signingkey = 7EC61D9E6C814B38
+[init]
+	defaultBranch = main

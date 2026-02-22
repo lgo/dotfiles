@@ -1,5 +1,0 @@
-name: iTerm2
-scripts:
-  - name: Sync iTerm preferences
-    file: sync-iterm-preferences.sh
-    bootstrap: true

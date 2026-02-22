@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [[ $# -lt 1 ]]; then
+  echo "Usage: nixr {build|test|switch|install} [extra darwin-rebuild args...]"
+  exit 1
+fi
+
+action="$1"
+shift || true
+
+flake="${HOME}/.dotfiles/nixos#sprout"
+
+case "$action" in
+  build)
+    exec darwin-rebuild build --flake "$flake" "$@"
+    ;;
+  test)
+    exec sudo darwin-rebuild check --flake "$flake" "$@"
+    ;;
+  switch)
+    exec sudo darwin-rebuild switch --flake "$flake" "$@"
+    ;;
+  install)
+    # Bootstrap nix-darwin on fresh machines before darwin-rebuild is installed.
+    exec nix run nix-darwin/nix-darwin-24.11#darwin-rebuild \
+      --extra-experimental-features nix-command \
+      --extra-experimental-features flakes \
+      -- --flake "$flake" switch "$@"
+    ;;
+  *)
+    echo "Unknown action: $action"
+    echo "Usage: nixr {build|test|switch|install} [extra darwin-rebuild args...]"
+    exit 1
+    ;;
+esac

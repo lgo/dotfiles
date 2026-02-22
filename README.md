@@ -1,234 +1,130 @@
-# Usage
+# Dotfiles
 
-### Organization
+This repository is managed with `nix-darwin` + Home Manager.
 
-Dotfiles are split up into folders called _topics_. Each topic folder has as _topics.yaml_ file which has details about the configuration. A topics will specify a list of symlinks and scripts. Here's an example of the VS Code (`editors/vscode`) topic.
-
-```yaml
-name: Visual Studio Code
-scripts:
-  - name: Backup extensions
-    file: backup-extensions.sh
-  - name: Install extensions
-    file: install-extensions.sh
-    bootstrap: true
-symlinks:
-  - src: keybindings.json
-    path: ~/Library/Application Support/Code/User/keybindings.json
-  - src: settings.json
-    path: ~/Library/Application Support/Code/User/settings.json
-  - src: snippets
-    path: ~/Library/Application Support/Code/User/snippets
-```
-
-It has two scripts, backup extensions and install extensions. You'll notice install extensions has `bootstrap: true`, which means that this script will be run while bootstrapping the dotfiles! There are also a handful of symlinks, which will also be created when bootstrapping.
-
-### Setup
+## Setup
 
 ```bash
-# Grab the dotfiles.
-$ git clone git@github.com:lgo/dotfiles.git ~/.dotfiles && ~/.dotfiles
-# Make the dotfiles more accessible to Finder.
-$ ln -s ~/.dotfiles ~/dotfiles
-
-# (one-time prep, because the dotfiles manager is Ruby)
-$ bundle install
-
-$ ./dotfiles.rb
-Usage: ./dotfiles.rb <subcommand> [options]
-
-Commands:
-  bootstrap   - sets up symlinks and executes all installation scripts
-  info        - get information on topic(s) or script(s)
-
-See 'dotfiles COMMAND --help' for more information on a specific command.
-```
-
-### Usage
-
-```bash
-# You can view all of the available topics of dotfiles.
-$ ./dotfiles.rb info
-Available topics
-iterm: iTerm2
-macos: macos
-editors/vscode: Visual Studio Code
-...
-
-# You can view the specific details about a topic, including
-# 1. The state of the symlinks (✅-> installed, ❌ not installed)
-# 2. All of the scripts (⚙ -> bootstrap script)
-$ ./dotfiles.rb info editors/vscode
-Visual Studio Code (editors/vscode)
-
- [✅] keybindings.json -> ~/Library/Application Support/Code/User/keybindings.json
- [✅] settings.json -> ~/Library/Application Support/Code/User/settings.json
- [❌] snippets -> ~/Library/Application Support/Code/User/snippets
-
-Scripts
-      Backup extensions (/Users/joey/.dotfiles/editors/vscode/backup-extensions.sh)
- [⚙ ] Install extensions (/Users/joey/.dotfiles/editors/vscode/install-extensions.sh)
-
-(from /Users/joey/.dotfiles/editors/vscode)
-
-# Bootstrap the dotfiles for editors/vscode, only making symlinks.
-$ ./dotfiles.rb bootstrap editors/vscode --only-symlinks
- [ ⚙  ] bootstrapping Visual Studio Code (editors/vscode)
- [ OK ] keybindings.json already linked
- [ OK ] settings.json already linked
- [ OK ] snippets linked
- [ ✅ ] completed Visual Studio Code (editors/vscode)
-
-# Or, we can just run everything including the installation scripts.
-# --only-scripts can be provided to only run the bootstrap scripts.
-$ ./dotfiles.rb bootstrap editors/vscode
- [ ⚙  ] bootstrapping Visual Studio Code (editors/vscode)
- [ OK ] keybindings.json already linked
- [ OK ] settings.json already linked
- [ OK ] snippets already linked
- [ .. ] running script: Install extensions
- [ OK ] finished script
- [ ✅ ] completed Visual Studio Code (editors/vscode)
-```
-
-# What's provided
-
-- zsh and an oh-my-zsh configuration
-- macos configurations. using the `defaults` command on macos, there are plenty of power-user system configuration that is set, such speeding up UI animations, disabling features that are commonly unused or slow (dashboard, launchpad), preventing chrome's gesture swipe to go forward/backward in history, and plenty more. This is all in the `macos/set-defaults.sh` script.
-- basic configurations for vscode, vim, and spacemacs & symlinking for them.
-- ... (probably lots more!)
-
----
-
-# dotfiles (old readme, from the holman/dotfiles base)
-
-Adopted from holman dotfiles.
-
-As with holman dotfiles, these are topic-centric which helps split
-things up to concerns of including software packages.
-
-## topical
-
-Everything's built around topic areas. If you're adding a new area to
-your forked dotfiles — say, "Java" — you can simply add a `java`
-directory and put files in there. Anything with an extension of `.zsh`
-will get automatically included into your shell. Anything with an
-extension of `.symlink` will get symlinked without extension into
-`$HOME` when you run `script/bootstrap`.
-
-## what's inside
-
-- homebrew setup
-- macOS configuration. this includes lots of system defaults
-- ...
-
-## components
-
-There's a few special files in the hierarchy.
-
-- **bin/**: Anything in `bin/` will get added to your `$PATH` and be made
-  available everywhere.
-- **Brewfile**: This is a list of applications for
-  [Homebrew Cask](http://caskroom.io) to install: things like Chrome and
-  1Password and Adium and stuff. Might want to edit this file before
-  running any initial setup.
-- **topic/\*.zsh**: configuration files
-  - Environment configuration (i.e., `.zshenv`)
-    - **topic/\*env.zsh**: Any file ending with `env.zsh` is loaded
-      second and is expected to setup any additional environment
-      (e.g., shell options).
-  - Interactive configuration (i.e., `.zshrc`)
-    - **topic/\*path.zsh**: Any file ending with `path.zsh` (except
-      those ending with `fpath.zsh`) is loaded first and is expected
-      to setup `$PATH` or similar.
-    - **topic/\*fpath.zsh**: Any file ending with `fpath.zsh` is
-      loaded for interactive shells only. They are expected to
-      populate `$fpath`.
-    - **topic/\*.zsh**: Any files ending in `.zsh` (except those
-      specified elsewhere) are loaded for interactive shells only.
-      Interactive configuration can include aliases, color output,
-      prompt configuration, or anything else that should only be
-      loaded when a user is interacting with Zsh.
-    - **topic/\*completion.zsh**: Any file ending with
-      `completion.zsh` is loaded last for interactive shells only.
-      They are expected to setup autocomplete.
-  - Login configuration (i.e., `.zprofile`, `.zlogin`, `.zlogout`)
-    - **topic/\*profile.zsh**: Any file ending with `profile.zsh` is
-      loaded for login shells only. Unlike `.zlogin`, these files
-      are loaded before the interactive files above are loaded.
-    - **topic/\*login.zsh**: Any file ending in `login.zsh` is
-      loaded for login shells only. Unlike `.zprofile`, they are
-      loaded after your interactive files are loaded above. This is
-      the ideal place to put anything you want to see when you start
-      up a new login shell (e.g., cowsay, date, todo, fortune).
-    - **topic/\*logout.zsh**: Any file ending in `logout.zsh` is
-      loaded for login shells only and only when you exit/logout the
-      shell.
-- **topic/\*.symlink**: Any files ending in `*.symlink` get symlinked into
-  your `$HOME`. This is so you can keep all of those versioned in your dotfiles
-  but still keep those autoloaded files in your home directory. These get
-  symlinked in when you run `script/bootstrap`.
-
-## install
-
-Run this:
-
-```sh
-git clone https://github.com/lego/dotfiles.git ~/.dotfiles
+git clone git@github.com:lgo/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
-script/bootstrap
 ```
 
-This will symlink the appropriate files in `.dotfiles` to your home directory.
-Everything is configured and tweaked within `~/.dotfiles`.
+Build or switch with your `sprout` host:
 
-The main file you'll want to change right off the bat is
-`zsh/zshenv.symlink`, which sets up a few paths that'll be different on
-your particular machine.
+```bash
+darwin-rebuild build --flake ~/.dotfiles/nixos#sprout
+sudo darwin-rebuild switch --flake ~/.dotfiles/nixos#sprout
+```
 
-`dot` is a simple script that installs some dependencies, sets sane macOS
-defaults, and so on. Tweak this script, and occasionally run `dot` from
-time to time to keep your environment fresh and up-to-date. You can find
-this script in `bin/`.
+Or use the helper script:
 
-## test
+```bash
+nixr build
+nixr test
+nixr switch
+nixr install
+```
 
-Because you don't want to necessarily ruin your local environment
-everytime you make a change, let's use Docker.
+Task runner shortcuts are also available:
 
-**Note:** you can only test the pieces of your dotfiles that will work
-in a Linux environment. macOS specifics cannot be tested.
+```bash
+task build-sprout
+task flake-check
+task smoke
+task check
+task benchmark-shell
+```
 
-### dependencies
+CI runs in GitHub Actions (`.github/workflows/ci.yml`) and executes:
+- `nix flake check ./nixos`
+- `pre-commit run --all-files` (with darwin-only hook skipped)
+- `./bin/smoke-test ci`
 
-#### docker
+## Layout
 
-Be sure Docker is installed.
+At a high level, this repo is split into three layers:
 
-##### macOS
+1. Declarative system/user state in `nixos/` (nix-darwin + Home Manager).
+2. Shared tool/app config assets under `tools/`, `zsh/`, and `templates/`.
+3. Operator workflows and docs in `bin/`, `Taskfile.yml`, and `docs/`.
 
-    brew cask install docker
+| Path | Includes | Purpose |
+| --- | --- | --- |
+| `nixos/` | Flake entrypoint, host wiring, nix-darwin + Home Manager modules | Source of truth for machine/user configuration |
+| `nixos/hosts/` | Host profiles (currently `sprout`) | Per-host composition layer for shared modules |
+| `nixos/modules/` | System modules (defaults, Homebrew, fonts, users, macOS settings) | OS-level policy and package ownership boundaries |
+| `nixos/home/` | Home Manager packages, shell programs, editor/tool modules, session env/path | User-level CLI/editor/runtime setup |
+| `nixos/files/` | Extra sourced shell/config snippets | Structured extensions for shell/runtime behavior |
+| `tools/` | App configs (git, editors, tmux, k9s, hammerspoon, etc.) | Version-controlled tool settings, often symlinked out-of-store |
+| `zsh/` | Base zsh environment/login files | Shell bootstrap inputs consumed by Home Manager |
+| `bin/` | Utility scripts (`nixr`, setup helpers, validation scripts) | Operational commands for day-2 management |
+| `Taskfile.yml` | Task targets (`build-sprout`, `check`, `benchmark-shell`, etc.) | Standardized local workflows |
+| `templates/` | Reusable templates (for example direnv policy files) | Consistent project bootstrap patterns |
+| `docs/` | Architecture, onboarding, and runbook docs | Human-facing references and procedures |
 
-### run
+## Notes
 
-    ./test/run.sh
+- Many files are intentionally symlinked from `~/.dotfiles` so changes outside Nix still land in git-tracked files.
+- Homebrew is managed through `nixos/modules/homebrew.nix`.
 
-## bugs
+## Package Ownership
 
-I want this to work for everyone; that means when you clone it down it should
-work for you even though you may not have `rbenv` installed, for example. That
-said, I do use this as _my_ dotfiles, so there's a good chance I may break
-something if I forget to make a check for a dependency.
+| Owner | Examples | Rationale |
+| --- | --- | --- |
+| Nix/Home Manager | `go-task`, `ruby`, `git`, `go`, `jq`, `atuin`, `zoxide`, `fd` | Reproducible versions, declarative upgrades, predictable shell behavior across rebuilds |
+| Homebrew (intentionally retained) | `docker`, `postgresql`, `redis`, `openjdk`, `wireshark`, `yarn` | Better macOS integration, service lifecycle management, or native app ecosystem fit |
+| Homebrew (remaining migration candidates) | `python@3.13`, `node`, `bfg`, `woof` | Pending migration/compatibility decisions or no clean nixpkgs replacement |
 
-If you're brand-new to the project and run into any blockers, please
-[open an issue](https://github.com/holman/dotfiles/issues) on this repository
-and I'd love to get it fixed for you!
+## Migration Policy
 
-## thanks
+- Do not add references to legacy/moved paths in scripts, docs, or nix modules.
+- Store user-managed application configuration under `tools/`.
+- Keep `macos/` only for exported macOS app state/assets that are synced via Home Manager.
 
-I forked [Ryan Bates](http://github.com/ryanb)' excellent
-[dotfiles](http://github.com/ryanb/dotfiles) for a couple years before the
-weight of my changes and tweaks inspired me to finally roll my own. But Ryan's
-dotfiles were an easy way to get into bash customization, and then to jump ship
-to zsh a bit later. A decent amount of the code in these dotfiles stem or are
-inspired from Ryan's original project.
+## Runbook
+
+### Day-2 Commands
+
+```bash
+# Evaluate/build only (no activation)
+nixr build
+
+# Build + activation checks (no full switch)
+nixr test
+
+# Build + activate as current system generation
+nixr switch
+
+# First-time bootstrap on a fresh machine
+nixr install
+```
+
+### Rollback
+
+```bash
+# Show available generations
+darwin-rebuild --list-generations --flake ~/.dotfiles/nixos#sprout
+
+# Roll back to previous generation
+sudo darwin-rebuild switch --rollback --flake ~/.dotfiles/nixos#sprout
+
+# Or switch to a specific generation number
+sudo darwin-rebuild switch --switch-generation <GENERATION> --flake ~/.dotfiles/nixos#sprout
+```
+
+### Common Failure Modes
+
+- Homebrew formulas removed/renamed:
+  - symptom: `No available formula with the name ...`
+  - action: remove or replace the formula in `nixos/modules/homebrew.nix`, then rerun `nixr build`.
+- Homebrew module says brew is missing:
+  - symptom: `Using the homebrew module requires homebrew installed`
+  - action: verify `brew` exists at `/opt/homebrew/bin/brew` and `brewPrefix` in `nixos/modules/homebrew.nix` matches.
+- Rosetta/arch mismatch while installing brew packages:
+  - symptom: `Cannot install under Rosetta 2 in ARM default prefix (/opt/homebrew)!`
+  - action: run brew under ARM (`arch -arm64`) and verify shell session architecture before rebuilding.
+- Legacy deprecated `postgresql@14` warning from `brew doctor`:
+  - symptom: `Some installed formulae are deprecated or disabled: postgresql@14`
+  - action: if you no longer need v14 data, remove the old keg (`brew uninstall postgresql@14`), then keep `postgresql` managed via `nixos/modules/homebrew.nix`.
+- `sudo` prompts during `switch`/`test`:
+  - expected for activation steps; `build` is the no-sudo dry path for quick validation.

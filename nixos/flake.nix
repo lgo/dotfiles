@@ -1,50 +1,58 @@
 {
-  description = "pollen nix-darwin system flake";
+  description = "sprout nix-darwin system flake";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-24.11-darwin";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-25.05-darwin";
 
-    nix-darwin.url = "github:LnL7/nix-darwin/nix-darwin-24.11";
+    nix-darwin.url = "github:LnL7/nix-darwin/nix-darwin-25.05";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
 
-    home-manager.url = "github:nix-community/home-manager/release-24.11";
+    home-manager.url = "github:nix-community/home-manager/release-25.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
+
+    agenix.url = "github:ryantm/agenix";
+    agenix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs @ {
-    self,
     nix-darwin,
-    home-manager,
-    nixpkgs
-  }:
-  let
+    nixpkgs,
+    ...
+  }: let
     username = "joey";
     useremail = "joey@pereira.io";
+    systems = [
+      "aarch64-darwin"
+      "x86_64-linux"
+    ];
+    forAllSystems = f:
+      nixpkgs.lib.genAttrs systems (system:
+        f {
+          inherit system;
+          pkgs = import nixpkgs {inherit system;};
+        });
     specialArgs =
       inputs
       // {
         inherit username useremail;
       };
-  in
-  {
-    # Build darwin flake using:
-    # $ darwin-rebuild build --flake .#pollen
-    darwinConfigurations."pollen" = nix-darwin.lib.darwinSystem {
+  in {
+    darwinConfigurations."sprout" = nix-darwin.lib.darwinSystem {
       inherit specialArgs;
-      system = "x86_64-darwin";
+      system = "aarch64-darwin";
       modules = [
-        ./modules/nix-core.nix
-        ./modules/system.nix
-        ./modules/apps.nix
-        ./modules/users.nix
-        # ./configuration.nix
-        home-manager.darwinModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.joey = import ./home.nix;
-        }
+        ./hosts/sprout/default.nix
       ];
     };
+
+    checks = forAllSystems ({pkgs, ...}: {
+      nix-fmt = pkgs.runCommand "nix-fmt-check" {nativeBuildInputs = [pkgs.alejandra];} ''
+        cd ${./.}
+        alejandra --check .
+        touch $out
+      '';
+    });
   };
 }

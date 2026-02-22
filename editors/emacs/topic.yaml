@@ -1,6 +1,0 @@
-name: spacemacs
-symlinks:
-  - src: .spacemacs
-    path: ~/.spacemacs
-  - src: .spacemacs_layers
-    path: ~/.spacemacs_layers

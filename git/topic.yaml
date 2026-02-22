@@ -1,8 +1,0 @@
-name: Git
-symlinks:
-  - src: gitconfig
-    path: ~/.gitconfig
-  - src: gitignore_global
-    path: ~/.gitignore_global
-  # We do not need to clutter ~/ with any other configurations because the
-  # gitconfig will include files in .dotfiles as needed.

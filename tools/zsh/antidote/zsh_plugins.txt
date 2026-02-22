@@ -1,0 +1,7 @@
+zsh-users/zsh-completions
+belak/zsh-utils path:editor
+zsh-users/zsh-history-substring-search
+
+romkatv/zsh-bench kind:path
+
+zdharma-continuum/fast-syntax-highlighting kind:defer

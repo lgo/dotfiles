@@ -1,1 +1,1 @@
-alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
+../../tools/tailscale/zsh/aliases.zsh

@@ -18,15 +18,15 @@ fetch_only_my_branch_repos=(
 # Only use pclone for repositories with overriden refspecs.
 
 if [[ $# -ne 1 && $# -ne 2 ]]; then
-    echo "Illegal number of parameters. \nUsage: $0 <repository> [<directory>]"
-    exit 1
+  echo "Illegal number of parameters. \nUsage: $0 <repository> [<directory>]"
+  exit 1
 fi
 
 repository=$1
 
 allowed_repo=false
 for repo in "${fetch_only_my_branch_repos[@]}"; do
-  if [[ $repository =~  ".*$repo.*" ]]; then
+  if [[ $repository =~ ".*$repo.*" ]]; then
     allowed_repo=true
   fi
 done

@@ -1,0 +1,3 @@
+[mcp_servers.nix-os]
+command = "uvx"
+args = ["--python", "3.12", "mcp-nixos"]

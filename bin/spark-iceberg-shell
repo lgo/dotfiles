@@ -1,9 +1,8 @@
 #!/bin/bash
 
-spark-shell --packages org.apache.iceberg:iceberg-spark-runtime-3.2_2.12:0.13.1\
-    --conf spark.sql.extensions=org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions \
-    --conf spark.sql.catalog.spark_catalog=org.apache.iceberg.spark.SparkSessionCatalog \
-    --conf spark.sql.catalog.spark_catalog.type=hive \
-    --conf spark.sql.catalog.local=org.apache.iceberg.spark.SparkCatalog \
-    --conf spark.sql.catalog.local.type=hadoop \
-    --conf spark.sql.catalog.local.warehouse=hdfs://localhost:9000/warehouse
+spark-shell --packages org.apache.iceberg:iceberg-spark-runtime-3.2_2.12:0.13.1 --conf spark.sql.extensions=org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions \
+  --conf spark.sql.catalog.spark_catalog=org.apache.iceberg.spark.SparkSessionCatalog \
+  --conf spark.sql.catalog.spark_catalog.type=hive \
+  --conf spark.sql.catalog.local=org.apache.iceberg.spark.SparkCatalog \
+  --conf spark.sql.catalog.local.type=hadoop \
+  --conf spark.sql.catalog.local.warehouse=hdfs://localhost:9000/warehouse

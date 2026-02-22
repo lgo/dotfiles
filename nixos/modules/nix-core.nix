@@ -1,29 +1,21 @@
-
-{ pkgs, lib, ... }:
-
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
+  nix.enable = false;
+
   # Enable flakes globally.
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
+
+  environment.etc."nix/nix.custom.conf".text = ''
+    # Managed by nix-darwin (Determinate Nix reads this via nix.conf).
+    trusted-users = root @admin ${config.system.primaryUser or "joey"}
+  '';
 
   # Allow unfree packages.
   nixpkgs.config.allowUnfree = true;
 
-  # Auto upgrade nix package and the daemon service.
-  services.nix-daemon.enable = true;
-
   nix.package = pkgs.nix;
-
-  # Do garbage collection weekly to keep disk usage low.
-  nix.gc = {
-    automatic = lib.mkDefault true;
-    options = lib.mkDefault "--delete-older-than 7d";
-  };
-
-
-  # Disable auto-optimise-store because of this issue:
-  #   https://github.com/NixOS/nix/issues/7273
-  # "error: cannot link '/nix/store/.tmp-link-xxxxx-xxxxx' to '/nix/store/.links/xxxx': File exists"
-  # nix.settings = {
-  #   auto-optimise-store = false;
-  # };
 }

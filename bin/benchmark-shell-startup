@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+runs="${1:-10}"
+
+if ! [[ "$runs" =~ ^[0-9]+$ ]] || [[ "$runs" -lt 1 ]]; then
+  echo "Usage: $0 [runs]"
+  exit 1
+fi
+
+echo "Benchmarking interactive zsh startup (${runs} runs)..."
+
+for i in $(seq 1 "$runs"); do
+  /usr/bin/time -p /bin/zsh -i -c exit 2>&1 >/dev/null | awk '/^real /{print $2}'
+done | awk '
+  { sum += $1; values[NR] = $1 }
+  END {
+    if (NR == 0) exit 1;
+    mean = sum / NR;
+    for (i = 1; i <= NR; i++) {
+      d = values[i] - mean;
+      var += d * d;
+    }
+    stddev = (NR > 1) ? sqrt(var / (NR - 1)) : 0;
+    printf("runs=%d mean=%.3fs stddev=%.3fs\n", NR, mean, stddev);
+  }
+'

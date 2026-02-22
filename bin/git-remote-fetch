@@ -20,11 +20,11 @@ if [[ $# -eq 0 || $# -gt 2 ]]; then
   exit 1
 fi
 
-BRANCH="${1}";
-REMOTE="${2:-origin}";
-shift 2;
+BRANCH="${1}"
+REMOTE="${2:-origin}"
+shift 2
 
 # Remove any existing fetch refs for the branch.
 # git config --unset-all "remote.$REMOTE.fetch";
-git config --add "remote.$REMOTE.fetch" "+refs/heads/$BRANCH:refs/heads/$BRANCH";
-git fetch "$REMOTE" "$BRANCH";
+git config --add "remote.$REMOTE.fetch" "+refs/heads/$BRANCH:refs/heads/$BRANCH"
+git fetch "$REMOTE" "$BRANCH"

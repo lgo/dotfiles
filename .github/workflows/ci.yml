@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v14
+
+      - name: Enable Nix Cache
+        uses: DeterminateSystems/magic-nix-cache-action@v8
+
+      - name: Flake checks
+        run: nix flake check ./nixos
+
+      - name: Pre-commit
+        run: |
+          nix shell \
+            nixpkgs#pre-commit \
+            nixpkgs#alejandra \
+            nixpkgs#shellcheck \
+            nixpkgs#shfmt \
+            nixpkgs#gitleaks \
+            -c bash -lc 'SKIP=darwin-rebuild-build-sprout pre-commit run --all-files'
+
+      - name: Smoke test (CI mode)
+        run: ./bin/smoke-test ci

@@ -1,0 +1,43 @@
+exclude: ^(\.codex/|tools/editors/(cursor|vscode)/(settings|keybindings)\.json|tools/editors/(cursor|vscode)/snippets/.*\.json)
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-json
+      - id: check-merge-conflict
+
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.28.0
+    hooks:
+      - id: gitleaks
+
+  - repo: local
+    hooks:
+      - id: alejandra
+        name: alejandra (nix fmt)
+        entry: alejandra -q
+        language: system
+        types_or: [nix]
+
+      - id: darwin-rebuild-build-sprout
+        name: darwin-rebuild build (sprout) for nix changes
+        entry: ./bin/pre-commit-darwin-build
+        language: system
+        files: ^nixos/.*\.(nix|sh)$|^nixos/flake\.(nix|lock)$
+        pass_filenames: false
+
+      - id: shfmt
+        name: shfmt (shell fmt)
+        entry: shfmt -w -i 2 -ci
+        language: system
+        files: ^(bin/.*|nixos/.*\.sh|tools/tmux/setup-pugins\.sh)$
+
+      - id: shellcheck
+        name: shellcheck (shell lint)
+        entry: shellcheck
+        language: system
+        files: ^(bin/.*|nixos/.*\.sh|tools/tmux/setup-pugins\.sh)$

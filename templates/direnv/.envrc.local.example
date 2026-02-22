@@ -1,0 +1,5 @@
+# Copy to .envrc.local and fill with project-specific secrets.
+# .envrc.local must be gitignored in each project.
+
+export EXAMPLE_API_TOKEN="replace-me"
+export EXAMPLE_ENDPOINT="https://api.example.com"
